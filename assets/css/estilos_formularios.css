@@ -1,0 +1,80 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Roboto";
+  height: 100vh;
+  background-image: url("../img/fondo_carrascosas-1.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.main-content--formulario {
+  margin-left: 250px;
+  margin-top: 80px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+}
+.titulo-con-modo {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  align-items: center;
+}
+.main__button {
+  width: 250px;
+  align-self: center;
+  color: #2b388f;
+  background-color: white;
+  padding: 10px 25px;
+  border-style: none;
+  box-shadow: 0 0 5px 2px #2b388f;
+  border-radius: 3px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.formulario {
+  color: #2b388f;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.form-row {
+  display: flex;
+  gap: 20px; /* Espacio entre columnas */
+  margin-bottom: 15px;
+}
+
+.form-group {
+  flex: 1; /* Hace que todos los grupos midan lo mismo */
+  display: flex;
+  flex-direction: column; /* Label arriba, Input abajo */
+  gap: 5px;
+}
+
+.form__label {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.form__input {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #2b388f;
+  /* El color original era blanco sobre azul según tu CSS, lo mantengo: */
+  color: white;
+  background-color: #2b388f;
+  width: 100%;
+}
+.hidden {
+  display: none;
+}

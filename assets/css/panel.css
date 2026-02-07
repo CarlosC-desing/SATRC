@@ -1,0 +1,293 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Roboto";
+  background-image: url("../img/fondo_alcaldia.jpeg");
+  background-size: cover;
+  background-attachment: fixed;
+}
+.main-registro {
+  margin-top: 70px;
+  margin-left: 240px;
+  padding: 20px 35px;
+}
+.main-registro__container {
+  display: flex;
+  flex-direction: column;
+}
+.panel-admin__title {
+  color: #005a9c;
+  margin-bottom: 20px;
+}
+.filter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.filter-form__label {
+  color: #2b388f;
+  margin-top: 8px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.filter-form__select {
+  background-color: #2b388f;
+  color: white;
+  border-style: none;
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border-radius: 3px;
+}
+
+.solicitudes-table {
+  width: 100%;
+  border-collapse: separate; /* Obligatorio para que funcione el radius */
+  border-spacing: 0; /* Elimina el espacio entre celdas */
+  background: white;
+  margin-top: 20px;
+  border-radius: 15px; /* El radio que desees */
+  overflow: hidden; /* Corta las celdas para que sigan la curva */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* Tu sombra suave */
+}
+.solicitudes-table__th,
+.solicitudes-table__td {
+  padding: 8px 10px;
+  text-align: left;
+}
+.solicitudes-table__th {
+  background-color: #03036d;
+  color: white;
+  height: 50px;
+}
+
+.solicitudes-table__tr--pendiente {
+  background-color: #ffe5e5;
+}
+.solicitudes-table__tr--en_proceso {
+  background-color: #fff9cc;
+}
+.solicitudes-table__tr--entregada {
+  background-color: #e5ffe5;
+}
+
+.row-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.row-actions__select {
+  padding: 6px;
+  font-size: 14px;
+  border-radius: 4px;
+  width: auto;
+  min-width: 140px;
+}
+.row-actions__btn-update {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.row-actions__btn-delete {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* --- NUEVOS CAMBIOS: LAYOUT Y SIDEBAR --- */
+
+.panel-layout {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+}
+
+/* Sidebar de Filtros */
+.panel-sidebar {
+  width: 240px;
+  height: 88vh;
+  background-color: white;
+  padding: 20px;
+  margin-top: 12vh;
+  flex-shrink: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.title-sidebar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-transform: uppercase;
+  color: #2b388f;
+}
+.title--small {
+  font-size: 15px;
+  font-weight: 300;
+}
+.title--large {
+  font-size: 12px;
+  font-size: 30px;
+}
+
+/* Contenido Principal (Ajuste del main) */
+.panel-main {
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 15vh;
+  width: 80%;
+}
+.panel-main__header {
+  color: white;
+}
+
+/* Ajustes específicos para el formulario dentro del sidebar */
+.filter-form__btn-apply {
+  width: 100%;
+  align-self: center;
+  color: #2b388f;
+  background-color: white;
+  padding: 10px;
+  border-style: none;
+  box-shadow: 0 0 5px 2px #2b388f;
+  border-radius: 3px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.filter-form__btn-new {
+  width: 100%;
+  align-self: center;
+  color: #2b388f;
+  background-color: white;
+  padding: 10px;
+  border-style: none;
+  box-shadow: 0 0 5px 2px #2b388f;
+  border-radius: 3px;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Resumen estadístico en sidebar */
+.panel-sidebar__summary {
+  color: white;
+}
+.panel-sidebar__summary-item {
+  font-size: 2rem;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.panel-sidebar__stats {
+  display: flex;
+  gap: 30px;
+}
+/* Estilos mejorados para el Formulario de Registro */
+.main-registro__title {
+  color: white;
+  margin-bottom: 20px;
+}
+.form-solicitud {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  border: 1px solid #e0e0e0;
+}
+
+.form-solicitud__label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  display: block;
+  font-size: 0.95rem;
+}
+
+.form-solicitud__input,
+.form-solicitud__select,
+.form-solicitud__textarea {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 20px;
+  border: 1px solid #ccd1d9;
+  border-radius: 6px;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.form-solicitud__input:focus,
+.form-solicitud__select:focus,
+.form-solicitud__textarea:focus {
+  outline: none;
+  border-color: #005a9c;
+  box-shadow: 0 0 0 3px rgba(0, 90, 156, 0.1);
+}
+
+.form-solicitud__btn-submit,
+.form-solicitud__btn-back {
+  width: 100%;
+  color: white;
+  background-color: #2b388f;
+  padding: 10px;
+  text-decoration: none;
+  border-style: none;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: background 0.1s ease;
+  text-transform: uppercase;
+}
+.form-solicitud__actions {
+  text-align: center;
+  margin-top: 20px;
+}
+/* Resultados de búsqueda AJAX */
+.form-solicitud__search-results {
+  background: #f9f9f9;
+  border-radius: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: -15px;
+  margin-bottom: 15px;
+  border: 1px solid #eee;
+}
+.solicitudes-table__textarea-scroll {
+  width: 150px; /* Ancho fijo para proteger las otras columnas */
+  height: 20px; /* Altura fija para que todas las filas sean iguales */
+  border: none;
+  background: transparent;
+  resize: none; /* Evita que el usuario cambie el tamaño */
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: #333;
+  outline: none;
+  padding: 5px;
+  scrollbar-width: thin; /* Hace el scroll más estético en Firefox */
+}
+
+/* Opcional: Estilo para el scrollbar en Chrome/Safari */
+.solicitudes-table__textarea-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.solicitudes-table__textarea-scroll::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}

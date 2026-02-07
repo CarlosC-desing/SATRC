@@ -1,0 +1,247 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-family: "Roboto";
+}
+
+/* --- Layout Base --- */
+.fondo {
+  height: 85vh;
+  display: flex;
+  position: relative;
+  z-index: 0;
+}
+
+.azul {
+  background-color: #2b388f;
+  width: 75%;
+}
+
+.blanco {
+  background-color: white;
+  width: 25%;
+}
+
+.bandera {
+  position: absolute;
+  width: 100%;
+  top: 20px;
+}
+
+.flag {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+}
+
+.escudo {
+  position: fixed;
+  z-index: 2;
+  height: 120px;
+  top: 5px;
+  left: 15px;
+}
+
+.all {
+  position: absolute;
+  top: 140px;
+  left: 100px;
+  z-index: 1;
+  width: 90vw;
+  display: flex;
+  height: 50vh;
+}
+
+/* --- Sección de Texto Izquierda --- */
+.info {
+  width: 58%;
+  color: white;
+}
+
+.info > h1 {
+  font-size: 65px;
+  text-transform: uppercase;
+}
+
+.info > h2 {
+  font-size: 43px;
+  margin-bottom: 50px;
+  font-weight: 100;
+}
+
+.info > p {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.info > ul {
+  font-size: 18px;
+  margin-left: 20px;
+  font-weight: 100;
+}
+
+/* --- Sección del Formulario --- */
+.form {
+  width: 42%;
+  padding-top: 10px;
+}
+
+.formulario {
+  border: 1px solid white;
+  background-color: white;
+  border-radius: 10px;
+  width: 85%;
+  height: 300px;
+  box-shadow: 0 0 20px 2px #2b388f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 40px;
+}
+
+.formulario > h3 {
+  text-transform: uppercase;
+  color: #2b388f;
+  font-size: 23px;
+  font-weight: 200;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  background-color: #3d9ff9;
+  border-radius: 3px;
+  width: 100%;
+  height: 35px;
+  margin-bottom: 20px;
+  padding: 0 20px;
+  overflow: hidden;
+}
+
+.icon-container {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.icon-container img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+  fill: white;
+}
+
+/* --- Inputs corregidos --- */
+.input-group input {
+  background: transparent !important;
+  border: none !important;
+  color: white !important;
+  font-size: 20px !important;
+  line-height: 65px !important; /* 👈 centrado vertical */
+  width: 100%;
+  height: 100% !important;
+  outline: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  appearance: none;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+}
+
+.input-group input:focus,
+.input-group input:active {
+  font-size: 20px !important;
+  line-height: 65px !important; /* 👈 evita salto */
+  outline: none !important;
+}
+
+.input-group input::placeholder {
+  font-size: 20px !important;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* --- Autocompletado corregido --- */
+.input-group input:-webkit-autofill,
+.input-group input:-webkit-autofill:hover,
+.input-group input:-webkit-autofill:focus {
+  -webkit-text-fill-color: white !important;
+  -webkit-box-shadow: 0 0 0px 1000px #3d9ff9 inset !important;
+  font-size: 20px !important;
+  line-height: 65px !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* --- Botón --- */
+.formulario > button {
+  background-color: #2b388f;
+  width: 40%;
+  padding: 10px 18px;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  font-size: 13px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s;
+}
+
+.formulario > button:hover {
+  background-color: #1a235a;
+}
+
+/* --- Footer --- */
+.footer {
+  height: 15vh;
+  width: 100%;
+  display: flex;
+  color: #2b388f;
+  font-size: 12px;
+}
+.footer__logos {
+  display: flex;
+  align-items: center;
+  padding: 0 30px 0 10px;
+  border-right: 1px solid #2b388f;
+  height: 80%;
+  width: 20vw;
+  align-self: center;
+}
+.logos__yari {
+  width: 60px;
+}
+.footer__info {
+  width: 70vw;
+  padding-left: 20px;
+  font-weight: 300;
+  align-self: center;
+}
+.info__registro {
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.footer__yo {
+  display: flex;
+  width: 30vw;
+  font-size: 15px;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 100%;
+  padding-bottom: 20px;
+  padding-right: 20px;
+}
+.yo__link {
+  text-decoration: none;
+}

@@ -1,0 +1,83 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto";
+  background-image: url("../img/fondo_carrascosas.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.main {
+  margin-top: 140px;
+}
+
+/* ... (mantén tu reset y body igual) ... */
+
+.main__contenedor {
+  display: grid;
+  grid-template-areas:
+    "n"
+    "m"
+    "u"
+    "d";
+  gap: 15px;
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.card--nacimiento {
+  grid-area: n;
+}
+
+.card--matrimonio {
+  grid-area: m;
+}
+
+.card--union {
+  grid-area: u;
+}
+
+.card--defuncion {
+  grid-area: d;
+}
+
+.contenedor__card {
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: transform 0.2s;
+  overflow: hidden;
+  /* Asegura que el enlace no se salga de las esquinas redondeadas */
+}
+
+.contenedor__card:hover {
+  transform: scale(1.02);
+  border-color: #2b388f;
+}
+
+/* El enlace ahora controla el layout interno */
+.card__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  /* El espacio interno ahora es parte del clic */
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: #2b388f;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.item__icon {
+  width: 40px;
+  height: 40px;
+}

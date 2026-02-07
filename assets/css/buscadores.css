@@ -1,0 +1,203 @@
+body {
+  font-family: "Roboto";
+  background-image: url("../img/fondo_yaritagua.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/* Diseño de la tabla de resultados modules/actas/buscar.php*/
+#main-content.main__content {
+  margin-top: 120px;
+  margin-left: 280px; /* Ajusta según el ancho de tu sidebar */
+  width: 76vw;
+  box-sizing: border-box;
+  display: block; /* Evita conflictos si otro CSS lo puso como flex */
+  background-color: transparent; /* O el color que prefieras */
+}
+
+.resultados__title {
+  color: white;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.bitacora-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.bitacora-table thead th {
+  background-color: #02036d;
+  color: white;
+  padding: 18px 10px;
+  text-align: left;
+}
+.bitacora-table thead th:first-child {
+  border-top-left-radius: 10px;
+}
+.bitacora-table thead th:last-child {
+  border-top-right-radius: 10px;
+}
+.bitacora-table td {
+  padding: 18px 10px;
+  color: #2b388f;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #2b388f;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 140px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  border-radius: 5px;
+  right: 0;
+}
+
+.dropdown-content a {
+  color: #333;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: block;
+  font-size: 13px;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #1a235a;
+}
+/*=================  SIDEBAR DE COMPONENTS/SIDEBAR_BUSQUEDA_CEDULA.PHP  =================================*/
+.sidebar__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #2b388f;
+  text-transform: uppercase;
+}
+.title__uno {
+  margin: 0;
+}
+.title__dos {
+  font-size: 30px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+.form__button {
+  width: 160px;
+  align-self: center;
+  color: #2b388f;
+  background-color: white;
+  padding: 10px 25px;
+  border-style: none;
+  box-shadow: 0 0 5px 2px #2b388f;
+  border-radius: 3px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.form__input {
+  background-color: #2b388f;
+  color: white;
+  border-style: none;
+  height: 30px;
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+.form__input:focus {
+  border-style: none;
+}
+/*====RESULTADO DE LA BUSQUEDA=====*/
+.container__resultado {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 25px;
+  background-color: #02036d;
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+}
+.resultado__cabecera {
+  display: flex;
+  gap: 10px;
+}
+.resultado__container {
+  background-color: white;
+  color: #02036d;
+  display: flex;
+  gap: 15px;
+  width: 70%;
+  border-radius: 3px;
+  padding: 0px 10px;
+}
+.resultado__p {
+  font-weight: 900;
+}
+.resultado__span {
+  font-weight: 400;
+}
+.icon {
+  background-color: #02036d;
+}
+.resultado__button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+.resultado__button:hover svg {
+  stroke: aqua;
+  transition: 0.3s ease;
+}
+.resultado__line {
+  height: 1px;
+  background-color: white;
+}
+.resultado__label {
+  text-transform: uppercase;
+  font-size: 23px;
+}
+.resultado__nombre {
+  font-size: 13px;
+  font-size: 18px;
+}
+
+.size-6 {
+  width: 24px; /* Ajusta el tamaño según necesites */
+  height: 24px;
+}
+.table-title {
+  color: white;
+  margin-bottom: 20px;
+}

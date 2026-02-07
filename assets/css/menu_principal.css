@@ -1,0 +1,206 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto";
+  height: 100vh;
+  background-image: url("../img/fondo_iglesia.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.header {
+  height: 12vh;
+  background-color: white;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.header--izquierda {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.header__logo {
+  width: 50px;
+}
+.header__title {
+  font-size: 15px;
+  color: #2b388f;
+}
+.nav__actions {
+  display: flex;
+  gap: 20px;
+}
+.header__svg {
+  height: 15px;
+}
+
+.nav__linked--registrar,
+.nav__linked--cerrar {
+  color: white;
+  background-color: #2b388f;
+  padding: 5px 10px;
+  text-decoration: none;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.main {
+  padding: 20px 60px;
+  color: white;
+}
+
+.main__title {
+  margin-bottom: 60px;
+}
+
+.main__contenedor {
+  display: flex;
+  gap: 20px;
+}
+
+.main__menu {
+  width: 65%;
+  display: grid;
+  gap: 15px;
+  grid-template-areas:
+    "buscar crear"
+    "registrar reportes"
+    "nueva-sol panel"
+    "bitacora bitacora";
+}
+
+/* --- Ajustes de alineación tipo Lista --- */
+.menu__item {
+  color: #1d47bc;
+  text-decoration: none;
+  background-color: white;
+  height: 60px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Alineado a la izquierda */
+  padding-left: 15%; /* Empuja el contenido al centro pero mantiene la alineación */
+  gap: 20px;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.menu__item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.item__icon {
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.menu__item span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  white-space: nowrap; /* Evita que el texto salte de línea */
+}
+
+/* Áreas del Grid */
+.item-crear {
+  grid-area: crear;
+}
+.item-registrar {
+  grid-area: registrar;
+}
+.item-buscar {
+  grid-area: buscar;
+}
+.item-reportes {
+  grid-area: reportes;
+}
+.item-nueva-sol {
+  grid-area: nueva-sol;
+}
+.item-panel {
+  grid-area: panel;
+}
+.item-bitacora {
+  grid-area: bitacora;
+}
+
+.oculto {
+  display: none;
+}
+.item-bitacora {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+/* --- Notificación --- */
+.notificacion-numero {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* --- Dashboard --- */
+.main__dashboard {
+  width: 35%;
+}
+
+.dashboard {
+  background-color: white;
+  color: #1d47bc;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  height: 285px;
+}
+
+.dashboard__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2b388f;
+  color: white;
+  height: 20%;
+}
+
+.dashboard__contadores {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 40px;
+}
+
+.contadores__personas,
+.contadores__conacta,
+.contadores__sinacta {
+  border-bottom: 1px solid #2b388f;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 30px 0px;
+  gap: 20px;
+}

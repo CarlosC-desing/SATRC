@@ -1,0 +1,228 @@
+body {
+  font-family: sans-serif;
+}
+.header-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: none;
+}
+.header-table td {
+  border: none;
+  padding: 0;
+  vertical-align: top;
+}
+.texto-institucional {
+  font-size: 8pt;
+  line-height: 1.5;
+}
+.linea-rellenable {
+  border-bottom: 1px solid #000;
+  display: inline-block;
+  min-width: 170px;
+  margin-left: 5px;
+  vertical-align: bottom;
+}
+.linea-datos {
+  border-bottom: 1px solid #000;
+  display: inline-block;
+  width: 150px;
+}
+.logo-cne {
+  width: 100px;
+  text-align: center;
+}
+.img-cne {
+  width: 140px;
+}
+.poder-electoral {
+  font-size: 7pt;
+  font-weight: bold;
+  margin-top: 2px;
+}
+.acta-info {
+  font-size: 8pt;
+  text-align: right;
+}
+.acta-box {
+  border: 1px solid #000;
+  padding: 5px;
+  width: 120px;
+  float: right;
+}
+.linea-acta {
+  border-bottom: 1px solid #000;
+  width: 60px;
+  display: inline-block;
+}
+.tabla-datos {
+  width: 100%;
+  border-collapse: collapse;
+}
+.tabla-datos td {
+  border: 1px solid #000;
+  padding: 2px 5px;
+  height: 25px;
+  vertical-align: top;
+}
+.titulo-seccion {
+  background-color: #555;
+  color: white;
+  font-weight: bold;
+  font-size: 9pt;
+  padding: 3px 10px;
+}
+.sub-label {
+  font-size: 6pt;
+  color: #333;
+  display: block;
+  font-weight: bold;
+}
+.check-box {
+  border: 1px solid #000;
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
+  line-height: 14px;
+  text-align: center;
+}
+.etiqueta-inline {
+  font-size: 5pt;
+  color: #333;
+  font-weight: bold;
+  margin-right: 2px;
+}
+.input-sm {
+  font-size: 8pt;
+  text-transform: uppercase;
+}
+.no-top {
+  border-top: none !important;
+}
+.p-0 {
+  padding: 0 !important;
+}
+.p-10 {
+  padding: 10px !important;
+}
+.text-right {
+  text-align: right;
+  padding: 2px;
+}
+.text-center {
+  text-align: center;
+}
+.tabla-acta-header {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8pt;
+}
+.borde-bottom-acta {
+  border-bottom: 1px solid #000;
+  width: 80px;
+}
+.tabla-tipo-registro {
+  margin: 5px 0;
+  font-weight: bold;
+  font-size: 8.5pt;
+  border-collapse: collapse;
+}
+.linea-corta {
+  width: 20px;
+  display: inline-block;
+  border-bottom: 1px solid #ccc;
+}
+.linea-media {
+  width: 30px;
+  display: inline-block;
+  border-bottom: 1px solid #ccc;
+}
+.gaceta-checks {
+  font-size: 6pt;
+  margin-top: 2px;
+}
+.tabla-interno {
+  border: none;
+}
+.b-bottom-mini {
+  border: none;
+  border-bottom: 1px solid #000;
+  font-size: 5pt;
+  text-align: center;
+}
+.b-left {
+  border: none;
+  border-left: 1px solid #000;
+}
+.mini-fecha {
+  border: none;
+  border-collapse: collapse;
+}
+.label-fecha {
+  border: none;
+  width: 20%;
+  font-size: 6pt;
+  font-weight: bold;
+}
+.h-12 {
+  height: 12px;
+}
+.tabla-datos-lineas {
+  width: 100%;
+  border-collapse: collapse;
+}
+.tabla-datos-lineas td {
+  border-bottom: 1px solid #ccc;
+  padding: 0;
+}
+.tabla-firmas-cuadros {
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.celda-firma-base {
+  border: 1px solid #000;
+  vertical-align: bottom;
+  text-align: center;
+  padding: 5px;
+}
+.linea-firma-interna {
+  border-top: 1px solid #000;
+  font-size: 6pt;
+  padding-top: 2px;
+}
+.cuadro-firma-largo {
+  border: 1px solid #000;
+  height: 90px;
+  vertical-align: bottom;
+  text-align: center;
+  padding-bottom: 10px;
+  font-size: 6pt;
+}
+
+/* ESTILOS CORREGIDOS PARA CENTRADO TOTAL */
+.firma-final-contenedor {
+  width: 100%;
+  margin-top: 80px;
+  text-align: center;
+}
+.firma-linea-principal {
+  display: block;
+  width: 500px;
+  margin: 0 auto;
+  border-top: 1.5px solid #000;
+  padding-top: 5px;
+}
+.txt-bold-lg {
+  font-size: 9pt;
+  font-weight: bold;
+  letter-spacing: 1px;
+  display: block;
+  text-align: center;
+}
+.txt-sello {
+  font-size: 7pt;
+  display: block;
+  margin-top: 2px;
+  text-align: center;
+}
