@@ -1,6 +1,5 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
-// RUTAS: Ajustadas para la nueva ubicación en modules/solicitudes/
 require_once '../../includes/db/config.php';
 include '../../modules/login/verificar_sesion.php';
 include '../../includes/db/conexion.php';
@@ -15,14 +14,41 @@ include ROOT_PATH . 'includes/components/sidebar_busqueda_cedula.php';
 
 <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/panel.css">
 
+<style>
+    .grupo-documento {
+        display: flex;
+        gap: 10px;
+    }
+
+    .select-corto {
+        width: 80px;
+        /* Ancho fijo para el tipo de documento */
+        flex-shrink: 0;
+    }
+
+    .input-largo {
+        flex-grow: 1;
+    }
+</style>
+
 <main class="main-registro">
     <div class="main-registro__container">
         <h2 class="main-registro__title">Registro de Solicitud de Copia de Acta</h2>
 
         <form class="form-solicitud" method="POST" action="guardar_solicitud.php">
             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
-            <label class="form-solicitud__label" for="cedula">Cédula del solicitante:</label>
-            <input class="form-solicitud__input" type="text" name="cedula" id="cedula" autocomplete="off" placeholder="Ej: 12345678" required>
+
+            <label class="form-solicitud__label" for="cedula">Documento de Identidad:</label>
+
+            <div class="grupo-documento">
+                <select id="tipo_doc" class="form-solicitud__select select-corto">
+                    <option value="V">V- Cédula</option>
+                    <option value="E">E- Extranejo</option>
+                    <option value="P">P- Pasaporte</option>
+                </select>
+
+                <input class="form-solicitud__input input-largo" type="text" name="cedula" id="cedula" autocomplete="off" placeholder="Ej: 12345678" required>
+            </div>
 
             <input type="hidden" name="id_persona" id="id_persona_hidden">
 
@@ -49,36 +75,51 @@ include ROOT_PATH . 'includes/components/sidebar_busqueda_cedula.php';
 </main>
 
 <script>
-    /**
-     * Función que se ejecuta desde buscar_persona_ajax.php 
-     * al hacer clic en un resultado de la lista.
-     */
-    function seleccionarPersona(cedula, id, nombre) {
-        document.getElementById('cedula').value = cedula;
+    function seleccionarPersona(cedulaCompleta, id, nombre) {
+        // Al seleccionar, ponemos el valor completo en el input visual
+        // Opcional: Podrías separar la letra y ponerla en el select, pero ponerlo todo en el input es más fácil
+        document.getElementById('cedula').value = cedulaCompleta;
         document.getElementById('id_persona_hidden').value = id;
-        document.getElementById('resultado_busqueda').innerHTML = '<span style="color:green">✅ Seleccionado: ' + nombre + '</span>';
+        document.getElementById('resultado_busqueda').innerHTML = '<span style="color:green; font-weight:bold; margin-top:5px; display:block;">✅ ' + nombre + '</span>';
     }
 
-    // Escuchador para la búsqueda en tiempo real
-    document.getElementById('cedula').addEventListener('input', function() {
-        let cedula = this.value;
-        // Limpiar el ID oculto si el usuario borra la cédula
+    // Función centralizada de búsqueda
+    function buscarPersona() {
+        const tipo = document.getElementById('tipo_doc').value;
+        const numero = document.getElementById('cedula').value.trim();
+
+        // Limpiar ID si se edita
         document.getElementById('id_persona_hidden').value = '';
 
-        if (cedula.length >= 4) {
-            fetch('buscar_persona_ajax.php?cedula=' + cedula)
+        // Solo buscar si hay números escritos
+        if (numero.length >= 3) {
+            // Concatenamos aquí: "V" + "-" + "123456"
+            // Si el usuario ya escribió "V-123", limpiamos para no enviar "V-V-123"
+            // Pero asumimos que el usuario solo escribe números en el input
+
+            // Limpieza básica por si el usuario escribe "V-123" dentro del input
+            let numeroLimpio = numero.replace(/^[VEPvep]-/, '');
+
+            const busquedaCompleta = tipo + '-' + numeroLimpio;
+
+            fetch('buscar_persona_ajax.php?cedula=' + encodeURIComponent(busquedaCompleta))
                 .then(res => res.text())
                 .then(data => {
                     document.getElementById('resultado_busqueda').innerHTML = data;
                 })
                 .catch(err => {
-                    console.error("Error en búsqueda:", err);
-                    document.getElementById('resultado_busqueda').innerHTML = 'Error en la conexión';
+                    console.error("Error:", err);
                 });
         } else {
             document.getElementById('resultado_busqueda').innerHTML = '';
         }
-    });
+    }
+
+    // Escuchar cambios en el input de texto
+    document.getElementById('cedula').addEventListener('input', buscarPersona);
+
+    // Escuchar cambios en el select (por si cambia de V a E con el número ya escrito)
+    document.getElementById('tipo_doc').addEventListener('change', buscarPersona);
 </script>
 </body>
 

@@ -29,11 +29,13 @@ include ROOT_PATH . 'includes/components/sidebar_busqueda.php';
 <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/expedientes.css">
 
 <div class="expediente-wrapper">
-    <h2>📂 Expediente Digital</h2>
-    <p style="font-size: 1.1em; color: #555; margin-bottom: 20px;">
-        Documentos asociados a: <strong><?= $persona['primer_nombre'] . " " . $persona['primer_apellido'] ?></strong>
-        (C.I: <?= $persona['cedula'] ?>)
-    </p>
+    <div class="expediente-header">
+        <h2 style="color: white;">Expediente Digital</h2>
+        <p style="font-size: 1.1em; color: white; margin-bottom: 20px;">
+            Documentos asociados a: <strong><?= $persona['primer_nombre'] . " " . $persona['primer_apellido'] ?></strong>
+            (C.I: <?= $persona['cedula'] ?>)
+        </p>
+    </div>
 
     <div class="card-upload">
         <h4 style="margin-top: 0;">📎 Subir Nuevo Documento</h4>
@@ -71,7 +73,7 @@ include ROOT_PATH . 'includes/components/sidebar_busqueda.php';
 
     <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
 
-    <h3 style="color: #2c3e50;">Documentos Archivados</h3>
+    <h3 style="color: white;">Documentos Archivados</h3>
 
     <div class="card-files">
         <?php
@@ -113,7 +115,7 @@ include ROOT_PATH . 'includes/components/sidebar_busqueda.php';
         ?>
     </div>
 
-    <a href="../actas/buscar.php" class="back-link">← Volver a la búsqueda</a>
+    <a href="../actas/buscar.php" class="back-link">Volver a la búsqueda</a>
 </div>
 
 <script>

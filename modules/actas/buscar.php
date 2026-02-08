@@ -175,7 +175,7 @@ $id_persona_consulta = isset($_GET['id']) && is_numeric($_GET['id']) ? (int)$_GE
                                     <button class='dropbtn'>Acciones</button>
                                     <div class='dropdown-content'>
                                         <a href='editar_persona.php?id={$id_p}'>Actualizar</a>
-                                        <a href='../expedientes/ver_expediente.php?id={$id_p}'>📂 Expediente Digital</a>
+                                        <a href='../expedientes/ver_expediente.php?id={$id_p}'>Expediente Digital</a>
                                         <a href='buscar.php?id={$id_p}'>Ver actas</a>
                                     </div>
                                 </div>
