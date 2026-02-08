@@ -271,6 +271,13 @@ body {
   font-size: 15px;
   text-align: center;
 }
+.title-sub-sidebar {
+  color: #2b388f;
+  font-size: 25px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 10px;
+}
 .title-sub {
   color: white;
   font-size: 25px;
