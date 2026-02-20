@@ -48,8 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_solicitud']) && is
     exit;
 }
 
-// --- 4. Consulta Principal ---
-$sql_base = "SELECT s.id_solicitud, s.tipo_acta, s.motivo, s.fecha_solicitud, s.estado,
+// --- 4. Consulta Principal (Incluye Cédula) ---
+$sql_base = "SELECT s.id_solicitud, s.tipo_acta, s.motivo, s.fecha_solicitud, s.estado, p.cedula,
                     CONCAT(p.primer_nombre, ' ', p.primer_apellido) AS solicitante
              FROM solicitudes_actas s
              JOIN personas p ON p.id_persona = s.id_persona";
@@ -120,7 +120,7 @@ include ROOT_PATH . 'includes/components/header.php';
             <table class="solicitudes-table">
                 <thead>
                     <tr>
-                        <th class="solicitudes-table__th">ID</th>
+                        <th class="solicitudes-table__th">Cédula</th>
                         <th class="solicitudes-table__th">Solicitante</th>
                         <th class="solicitudes-table__th">Tipo</th>
                         <th class="solicitudes-table__th">Motivo</th>
@@ -131,10 +131,13 @@ include ROOT_PATH . 'includes/components/header.php';
                 </thead>
                 <tbody>
                     <?php if ($result && $result->num_rows > 0): ?>
-                        <?php while ($row = $result->fetch_assoc()): ?>
+                        <?php while ($row = $result->fetch_assoc()):
+                            // Corrección para nombres con apóstrofes o caracteres especiales
+                            $nombre_limpio = htmlspecialchars(htmlspecialchars_decode($row['solicitante'], ENT_QUOTES), ENT_QUOTES, 'UTF-8');
+                        ?>
                             <tr class="solicitudes-table__tr--<?= htmlspecialchars($row['estado']) ?>">
-                                <td class="solicitudes-table__td"><?= (int)$row['id_solicitud'] ?></td>
-                                <td class="solicitudes-table__td"><?= htmlspecialchars($row['solicitante']) ?></td>
+                                <td class="solicitudes-table__td"><strong><?= htmlspecialchars($row['cedula']) ?></strong></td>
+                                <td class="solicitudes-table__td"><?= $nombre_limpio ?></td>
                                 <td class="solicitudes-table__td"><?= htmlspecialchars(ucfirst($row['tipo_acta'])) ?></td>
                                 <td class="solicitudes-table__td">
                                     <textarea class="solicitudes-table__textarea-scroll" readonly><?= htmlspecialchars($row['motivo']) ?></textarea>
@@ -155,13 +158,13 @@ include ROOT_PATH . 'includes/components/header.php';
                                                 <option value="en_proceso" <?= $row['estado'] == 'en_proceso' ? 'selected' : '' ?>>En proceso</option>
                                                 <option value="entregada" <?= $row['estado'] == 'entregada' ? 'selected' : '' ?>>Entregada</option>
                                             </select>
-                                            <button type="submit" class="row-actions__btn-update">✓</button>
+                                            <button type="submit" class="row-actions__btn-update" title="Actualizar estado">✓</button>
                                         </form>
 
-                                        <form method="POST" action="eliminar_solicitud.php" onsubmit="return confirm('¿Eliminar?');">
+                                        <form method="POST" action="eliminar_solicitud.php" onsubmit="return confirm('¿Eliminar esta solicitud?');">
                                             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                                             <input type="hidden" name="id_eliminar" value="<?= (int)$row['id_solicitud'] ?>">
-                                            <button type="submit" class="row-actions__btn-delete">✕</button>
+                                            <button type="submit" class="row-actions__btn-delete" title="Eliminar">✕</button>
                                         </form>
                                     </div>
                                 </td>
