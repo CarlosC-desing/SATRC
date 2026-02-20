@@ -1,5 +1,5 @@
 <?php
-// Al estar en la misma carpeta, solo necesitamos el nombre del archivo
+
 require_once __DIR__ . '/config.php';
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);

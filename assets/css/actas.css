@@ -16,8 +16,6 @@ body {
   margin-top: 140px;
 }
 
-/* ... (mantén tu reset y body igual) ... */
-
 .main__contenedor {
   display: grid;
   grid-template-areas:
@@ -53,7 +51,6 @@ body {
   border: 1px solid #ccc;
   transition: transform 0.2s;
   overflow: hidden;
-  /* Asegura que el enlace no se salga de las esquinas redondeadas */
 }
 
 .contenedor__card:hover {
@@ -61,14 +58,12 @@ body {
   border-color: #2b388f;
 }
 
-/* El enlace ahora controla el layout interno */
 .card__link {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
   padding: 20px;
-  /* El espacio interno ahora es parte del clic */
   width: 100%;
   height: 100%;
   text-decoration: none;

@@ -1,18 +1,14 @@
-/* Global */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   font-family: "Roboto", sans-serif;
   background-color: #f5f7fa;
 }
 
-/* --- AJUSTE DEL CONTENEDOR PRINCIPAL --- */
 .main-registro {
-  /* Calculamos 12vh del header + 5vh de espacio de respeto */
   padding-top: 17vh;
   padding-left: 20px;
   padding-right: 20px;
@@ -24,15 +20,11 @@ body {
   box-sizing: border-box;
   gap: 20px;
 }
-
-/* Aseguramos que el contenedor interno no se desborde */
 .contenedor-bitacora {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
 }
-
-/* --- TÍTULO --- */
 .main-registro__title {
   text-align: center;
   color: white;
@@ -40,8 +32,6 @@ body {
   text-transform: uppercase;
   font-size: 1.5rem;
 }
-
-/* --- FILTROS --- */
 .form-filtro {
   background: #fff;
   padding: 20px;
@@ -50,24 +40,20 @@ body {
   margin-bottom: 20px;
   border: 1px solid #e0e0e0;
 }
-
 .form-filtro__fieldset {
   border: none;
   margin-bottom: 15px;
 }
-
 .form-filtro__legend {
   font-weight: bold;
   color: #333;
   margin-bottom: 10px;
 }
-
 .form-filtro__checkbox-group {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
 }
-
 .form-filtro__label {
   display: flex;
   align-items: center;
@@ -78,11 +64,9 @@ body {
   border-radius: 4px;
   transition: background 0.2s;
 }
-
 .form-filtro__label:hover {
   background: #e9ecef;
 }
-
 .form-filtro__btn {
   background: #2b388f;
   color: white;
@@ -92,8 +76,6 @@ body {
   cursor: pointer;
   font-weight: bold;
 }
-
-/* --- TABLA --- */
 .tabla-responsive {
   width: 100%;
   overflow-x: auto;
@@ -101,12 +83,10 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-
 .tabla-bitacora {
   width: 100%;
   border-collapse: collapse;
 }
-
 .tabla-bitacora__th {
   background-color: #03036d;
   color: #ffffff;
@@ -115,15 +95,12 @@ body {
   font-size: 0.85rem;
   text-transform: uppercase;
 }
-
 .tabla-bitacora__td {
   padding: 12px 15px;
   border-bottom: 1px solid #eee;
   font-size: 0.9rem;
   color: #444;
 }
-
-/* --- ESTADOS DE FILAS --- */
 .accion-registro {
   background-color: #deffde;
   border-left: 5px solid #28a745;
@@ -136,26 +113,20 @@ body {
   background-color: #ffe0e0;
   border-left: 5px solid #dc3545;
 }
-/* Color Verde para cuando se adjunta un documento */
 .accion-adjunto {
   background-color: #d4edda !important;
   border-left: 5px solid #28a745;
 }
-
-/* Color Rojo para cuando se elimina un documento */
 .accion-elimino {
   background-color: #f8d7da !important;
   border-left: 5px solid #dc3545;
 }
-
-/* --- PAGINACIÓN --- */
 .paginacion {
   display: flex;
   justify-content: center;
   gap: 5px;
   margin: 25px 0;
 }
-
 .paginacion__link {
   padding: 8px 14px;
   background: #fff;
@@ -165,14 +136,11 @@ body {
   border-radius: 4px;
   font-weight: bold;
 }
-
 .paginacion__link--active {
   background: #2b388f;
   color: white;
   border-color: #2b388f;
 }
-
-/* --- BOTÓN VOLVER --- */
 .form-solicitud__btn-back {
   color: #2b388f;
   display: block;

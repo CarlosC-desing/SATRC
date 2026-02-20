@@ -6,22 +6,19 @@ body {
   background-attachment: fixed;
 }
 
-/* Diseño de la tabla de resultados modules/actas/buscar.php*/
 #main-content.main__content {
   margin-top: 120px;
-  margin-left: 280px; /* Ajusta según el ancho de tu sidebar */
+  margin-left: 280px;
   width: 76vw;
   box-sizing: border-box;
-  display: block; /* Evita conflictos si otro CSS lo puso como flex */
-  background-color: transparent; /* O el color que prefieras */
+  display: block;
+  background-color: transparent;
 }
-
 .resultados__title {
   color: white;
   margin-bottom: 20px;
   text-transform: uppercase;
 }
-
 .bitacora-table {
   width: 100%;
   border-collapse: collapse;
@@ -29,7 +26,6 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
-
 .bitacora-table thead th {
   background-color: #02036d;
   color: white;
@@ -194,7 +190,7 @@ body {
 }
 
 .size-6 {
-  width: 24px; /* Ajusta el tamaño según necesites */
+  width: 24px;
   height: 24px;
 }
 .table-title {

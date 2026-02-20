@@ -1,12 +1,11 @@
 <?php
-// Usamos __DIR__ para que la ruta sea absoluta desde la ubicación de este archivo
+
 require_once __DIR__ . '/../db/config.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Lógica de administrador
 $esAdmin = isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin';
 ?>
 <!DOCTYPE html>
