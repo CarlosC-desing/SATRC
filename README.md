@@ -39,8 +39,7 @@ El proyecto utiliza un enrutamiento centralizado hacia el directorio `public/` p
 ├── uploads/         # Almacenamiento de expedientes y archivos subidos
 ├── vendor/          # Dependencias de terceros instaladas por Composer
 └── .htaccess        # Reglas de seguridad y redirección Apache
-
-
+```
 🚀 Instalación y Despliegue
 Requisitos Previos
 Servidor web Apache (XAMPP/Laragon para desarrollo local).
@@ -73,3 +72,4 @@ Asegúrate de que el archivo .htaccess esté en la raíz del servidor (htdocs/ o
 
 👨‍💻 Autor
 Carlos Canelón - Desarrollo Full Stack y Diseño UI/UX
+
