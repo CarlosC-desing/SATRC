@@ -40,29 +40,26 @@ El proyecto utiliza un enrutamiento centralizado hacia el directorio `public/` p
 ├── vendor/          # Dependencias de terceros instaladas por Composer
 └── .htaccess        # Reglas de seguridad y redirección Apache
 ```
-🚀 Instalación y Despliegue
-Requisitos Previos
-Servidor web Apache (XAMPP/Laragon para desarrollo local).
-
-PHP 8.0 o superior.
-
-MySQL o MariaDB.
-
-Composer (opcional, dependiendo de las dependencias en vendor/).
+##🚀 Instalación y Despliegue
+ Requisitos Previos
+  * Servidor web Apache (XAMPP/Laragon para desarrollo local).
+  * PHP 8.0 o superior.
+  * MySQL o MariaDB.
+  * Composer (opcional, dependiendo de las dependencias en vendor/).
 
 Pasos para desarrollo local
-Clona este repositorio en tu carpeta htdocs o www.
-
-Importa la base de datos: Ejecuta el archivo .sql en tu gestor (ej. phpMyAdmin).
-
-Configura el entorno: Renombra o edita includes/db/config.php con tus credenciales:
+ *Clona este repositorio en tu carpeta htdocs o www.
+ * Importa la base de datos: Ejecuta el archivo .sql en tu gestor (ej.phpMyAdmin).
+ * Configura el entorno: Renombra o edita includes/db/config.php con tus credenciales:
 
 PHP
+```
 define('DB_HOST', 'localhost');
 define('DB_USER', 'tu_usuario');
 define('DB_PASS', 'tu_clave');
 define('DB_NAME', 'registro_civil');
 define('BASE_URL', 'http://localhost/tu_carpeta/');
+```
 Despliegue en Producción (Ej. InfinityFree / Hostinger)
 Sube todos los archivos respetando la estructura (omitiendo carpetas locales como node_modules).
 
@@ -70,6 +67,6 @@ Configura las variables en config.php con los datos proporcionados por tu provee
 
 Asegúrate de que el archivo .htaccess esté en la raíz del servidor (htdocs/ o public_html/) para enrutar el tráfico correctamente a /public/index.php.
 
-👨‍💻 Autor
+* 👨‍💻 Autor
 Carlos Canelón - Desarrollo Full Stack y Diseño UI/UX
 
