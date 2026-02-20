@@ -40,33 +40,30 @@ El proyecto utiliza un enrutamiento centralizado hacia el directorio `public/` p
 ├── vendor/          # Dependencias de terceros instaladas por Composer
 └── .htaccess        # Reglas de seguridad y redirección Apache
 ```
-##🚀 Instalación y Despliegue
- Requisitos Previos
-  * Servidor web Apache (XAMPP/Laragon para desarrollo local).
-  * PHP 8.0 o superior.
-  * MySQL o MariaDB.
-  * Composer (opcional, dependiendo de las dependencias en vendor/).
+## 🚀 Instalación y Despliegue
 
-Pasos para desarrollo local
- *Clona este repositorio en tu carpeta htdocs o www.
- * Importa la base de datos: Ejecuta el archivo .sql en tu gestor (ej.phpMyAdmin).
- * Configura el entorno: Renombra o edita includes/db/config.php con tus credenciales:
+### Requisitos Previos
+* Servidor web Apache (XAMPP/Laragon para desarrollo local).
+* PHP 8.0 o superior.
+* MySQL o MariaDB.
+* Composer (opcional, dependiendo de las dependencias en `vendor/`).
 
-PHP
-```
+### Pasos para desarrollo local
+1. Clona este repositorio en tu carpeta `htdocs` o `www`.
+2. Importa la base de datos: Ejecuta el archivo `.sql` en tu gestor (ej. phpMyAdmin).
+3. Configura el entorno: Renombra o edita `includes/db/config.php` con tus credenciales:
+
+```php
 define('DB_HOST', 'localhost');
 define('DB_USER', 'tu_usuario');
 define('DB_PASS', 'tu_clave');
 define('DB_NAME', 'registro_civil');
 define('BASE_URL', 'http://localhost/tu_carpeta/');
 ```
-Despliegue en Producción (Ej. InfinityFree / Hostinger)
-Sube todos los archivos respetando la estructura (omitiendo carpetas locales como node_modules).
+### Despliegue en Producción (Ej. InfinityFree / Hostinger)
+1. Sube todos los archivos respetando la estructura (omitiendo carpetas locales como `node_modules`).
+2. Configura las variables en `config.php` con los datos proporcionados por tu proveedor (Host, Usuario DB, Password DB).
+3. Asegúrate de que el archivo `.htaccess` esté en la raíz del servidor (`htdocs/` o `public_html/`) para enrutar el tráfico correctamente a `/public/index.php`.
 
-Configura las variables en config.php con los datos proporcionados por tu proveedor (Host, Usuario DB, Password DB).
-
-Asegúrate de que el archivo .htaccess esté en la raíz del servidor (htdocs/ o public_html/) para enrutar el tráfico correctamente a /public/index.php.
-
-* 👨‍💻 Autor
-Carlos Canelón - Desarrollo Full Stack y Diseño UI/UX
-
+## 👨‍💻 Autor
+* Carlos Canelón - Desarrollo Full Stack y Diseño UI/UX
