@@ -1,5 +1,4 @@
 <?php
-// CORRECCIÓN DE RUTA: public/ está al mismo nivel que includes/
 require_once '../includes/db/config.php';
 include ROOT_PATH . 'modules/login/verificar_sesion.php';
 include ROOT_PATH . 'includes/db/conexion.php';
@@ -9,7 +8,6 @@ header('Content-Type: text/html; charset=utf-8');
 
 registrarLog($conn, $_SESSION['usuario'], "Menú Principal", "Acceso al sistema", "Usuario accedió al menú principal");
 
-// Consulta de notificaciones para el badge
 $sql_notif = "SELECT COUNT(*) AS total FROM solicitudes_actas WHERE estado = 'pendiente'";
 $result_notif = $conn->query($sql_notif);
 $row_notif = $result_notif ? $result_notif->fetch_assoc() : ['total' => 0];

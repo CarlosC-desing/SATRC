@@ -1,5 +1,4 @@
 <?php
-// Recibimos los tipos seleccionados (nacimiento, matrimonio, etc.)
 $tipos = $_GET['tipo'] ?? [];
 if (!is_array($tipos)) $tipos = [$tipos];
 ?>
@@ -20,10 +19,8 @@ if (!is_array($tipos)) $tipos = [$tipos];
 </div>
 
 <script>
-    // Al cargar la página, pedimos la página 1 de cada tabla automáticamente
     document.addEventListener("DOMContentLoaded", function() {
         <?php foreach ($tipos as $tipo): ?>
-            // cargarTabla(tipo, origen, desde, hasta, pagina)
             cargarTabla('<?= $tipo ?>', 'general', '', '', 1);
         <?php endforeach; ?>
     });

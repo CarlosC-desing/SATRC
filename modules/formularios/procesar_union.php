@@ -1,6 +1,5 @@
 <?php
-// --- CONFIGURACIÓN DE DEPURACIÓN ---
-// Activamos reporte de errores internos pero evitamos que se impriman en pantalla para no romper el JSON
+
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
 
@@ -9,7 +8,7 @@ header('Content-Type: application/json');
 mysqli_report(MYSQLI_REPORT_OFF);
 
 try {
-    // [DEBUG 1] Verificando Inclusiones
+
     if (!file_exists('../../includes/db/config.php')) throw new Exception("[DEBUG 1] No se encuentra config.php");
     include_once '../../includes/db/config.php';
 
@@ -20,16 +19,14 @@ try {
     include '../../functions/registrar_log.php';
     include '../../functions/validaciones.php';
 
-    // [DEBUG 2] Verificando Conexión y Datos POST
     if (!isset($conn) || $conn->connect_error) throw new Exception("[DEBUG 2] Error de conexión a BD: " . ($conn->connect_error ?? 'Variable $conn nula'));
     if (empty($_POST)) throw new Exception("[DEBUG 2] No llegaron datos del formulario (POST vacío). Revise el tamaño de los archivos o el formulario.");
 
-    // Limpieza
+
     $_POST = sanear($_POST);
     $conn->begin_transaction();
     $usuario_resp = $_SESSION['usuario'] ?? 'Sistema';
 
-    // --- FUNCIONES INTERNAS ---
     function obtenerIdDebug($conn, $cedula, $nombre_campo)
     {
         if (empty($cedula)) return NULL;
@@ -41,7 +38,7 @@ try {
         $stmt->execute();
         $res = $stmt->get_result();
         $row = $res->fetch_assoc();
-        return $row ? $row['id_persona'] : false; // Retorna false si no existe para diferenciar de NULL
+        return $row ? $row['id_persona'] : false;
     }
 
     function fechaNull($fecha)
@@ -49,7 +46,6 @@ try {
         return (isset($fecha) && $fecha !== '') ? $fecha : NULL;
     }
 
-    // [DEBUG 3] Obteniendo IDs y Validando Existencia
     $ced_d1 = $_POST['cedula_d1'] ?? '';
     $id_d1  = obtenerIdDebug($conn, $ced_d1, 'Declarante 1');
     if ($id_d1 === false) throw new Exception("[DEBUG 3] La cédula del Declarante 1 ($ced_d1) no existe en la tabla personas.");
@@ -62,7 +58,6 @@ try {
     $id_aut = obtenerIdDebug($conn, $ced_aut, 'Autoridad');
     if ($id_aut === false) throw new Exception("[DEBUG 3] La cédula de la Autoridad ($ced_aut) no existe en la tabla personas.");
 
-    // Testigos (Opcionales en formulario, verificamos si se enviaron)
     $ced_t1 = $_POST['cedula_t1'] ?? '';
     $id_t1  = (!empty($ced_t1)) ? obtenerIdDebug($conn, $ced_t1, 'Testigo 1') : NULL;
     if (!empty($ced_t1) && $id_t1 === false) throw new Exception("[DEBUG 3] La cédula del Testigo 1 ($ced_t1) no existe.");
@@ -71,7 +66,6 @@ try {
     $id_t2  = (!empty($ced_t2)) ? obtenerIdDebug($conn, $ced_t2, 'Testigo 2') : NULL;
     if (!empty($ced_t2) && $id_t2 === false) throw new Exception("[DEBUG 3] La cédula del Testigo 2 ($ced_t2) no existe.");
 
-    // [DEBUG 4] Preparando Variables y Snapshots
     $d1_ant = [];
     $edo_d1 = $_POST['d1_edo_civil_anterior'] ?? 'SOLTERO';
     if ($edo_d1 == 'DIVORCIADO') $d1_ant = ['tipo' => 'DIVORCIADO', 'tribunal' => $_POST['d1_div_tribunal'] ?? '', 'sentencia' => $_POST['d1_div_sentencia'] ?? '', 'fecha' => $_POST['d1_div_fecha'] ?? ''];
@@ -91,7 +85,6 @@ try {
     $mes_acta   = $meses_es[date('n', $time_reg)];
     $anio_acta  = date('Y', $time_reg);
 
-    // [DEBUG 5] Preparando INSERT
     $sql = "INSERT INTO union_estable (
         numero_acta, tipo_operacion, dia_acta, mes_acta, anio_acta, fecha_registro, usuario_registro,
         id_persona1, id_persona2, id_autoridad, id_testigo1, id_testigo2,
@@ -115,7 +108,6 @@ try {
     $f_gac = fechaNull($_POST['gaceta_fecha'] ?? '');
     $f_apo = fechaNull($_POST['apoderado_fecha'] ?? '');
 
-    // Bind Param
     $bind = $stmt->bind_param(
         "sssssssiiiiisssssssssssssssssssssssssssss",
         $_POST['numero_acta'],
@@ -168,7 +160,6 @@ try {
     }
     $id_union_final = $conn->insert_id;
 
-    // [DEBUG 8] Hijos
     if (!empty($_POST['hijo_nom'])) {
         $sql_h = "INSERT INTO union_hijos (id_union, nombre_hijo, acta_hijo, reconocido, usuario_registro, fecha_registro) VALUES (?, ?, ?, ?, ?, NOW())";
         $stmt_h = $conn->prepare($sql_h);
@@ -180,7 +171,6 @@ try {
                 $rec_h  = $_POST['hijo_rec'][$idx] ?? 'NO';
                 $stmt_h->bind_param("issss", $id_union_final, $nombre, $acta_h, $rec_h, $usuario_resp);
                 if (!$stmt_h->execute()) {
-                    // No detenemos todo por un hijo, pero podríamos loguearlo
                 }
             }
         }
@@ -198,6 +188,6 @@ try {
     ]);
 } catch (Exception $e) {
     if (isset($conn)) $conn->rollback();
-    ob_end_clean(); // Limpiar cualquier salida previa
+    ob_end_clean();
     echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
 }

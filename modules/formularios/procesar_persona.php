@@ -33,7 +33,7 @@ try {
     $num_ced  = trim($_POST['cedula'] ?? '');
     $ced      = $tipo_doc . "-" . $num_ced;
 
-    // Datos básicos
+
     $p1_nom = trim($_POST['primer_nombre']    ?? '');
     $s1_nom = trim($_POST['segundo_nombre']   ?? '');
     $t1_nom = trim($_POST['tercer_nombre']    ?? '');
@@ -44,8 +44,6 @@ try {
     $res    = trim($_POST['residencia']       ?? '');
     $f_nac  = trim($_POST['fecha_nacimiento'] ?? '');
     $sx     = trim($_POST['sexo']             ?? '');
-
-    // Ubicación y Registro
     $nac    = trim($_POST['nacionalidad']         ?? '');
     $p_nac  = trim($_POST['pais_nacimiento']      ?? '');
     $e_nac  = trim($_POST['estado_nacimiento']    ?? '');
@@ -56,7 +54,6 @@ try {
 
     $u_resp = $_SESSION['usuario'] ?? 'Sistema';
 
-    // Cálculo automático de edad
     if (!empty($f_nac)) {
         $fecha_nac = new DateTime($f_nac);
         $hoy = new DateTime();
@@ -66,7 +63,7 @@ try {
         throw new Exception("La fecha de nacimiento es obligatoria.");
     }
 
-    // Manejo de nulos para base de datos
+
     $s1_nom_ref = ($s1_nom !== '') ? $s1_nom : null;
     $t1_nom_ref = ($t1_nom !== '') ? $t1_nom : null;
     $s1_ape_ref = ($s1_ape !== '') ? $s1_ape : null;

@@ -5,11 +5,9 @@ include '../login/verificar_sesion.php';
 include '../conexion.php';
 include '../log/registrar_log.php';
 
-// Desactivar reportes automáticos para evitar fugas de información
 mysqli_report(MYSQLI_REPORT_OFF);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // VALIDACIÓN CSRF
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         die("⚠️ Error de seguridad: Acción no autorizada.");
     }
@@ -25,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->begin_transaction();
 
     try {
-        // SQL SEGURO CON BIND_PARAM
+
         $stmt1 = $conn->prepare("UPDATE Persona SET nombre=?, apellido=?, fecha_nacimiento=? WHERE id_persona=?");
         if (!$stmt1) throw new Exception("Error en preparación de datos personales.");
 
@@ -40,13 +38,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $conn->commit();
 
-        // Registrar Log después del commit
+
         registrarLog($conn, $_SESSION['usuario'], "Actas", "Actualización", "ID: $id_persona");
 
         echo "✅ Acta actualizada correctamente. <a href='buscar_persona.php'>Volver</a>";
     } catch (Exception $e) {
         if (isset($conn)) $conn->rollback();
-        // Snyk corregido: No imprimimos $e->getMessage()
+
         echo "❌ Error técnico: No se pudo completar la actualización de los datos.";
     }
 }

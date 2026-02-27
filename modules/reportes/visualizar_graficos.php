@@ -3,16 +3,11 @@ require_once '../../includes/db/config.php';
 include ROOT_PATH . 'modules/login/verificar_sesion.php';
 include ROOT_PATH . 'includes/db/conexion.php';
 
-// --- CONFIGURACIÓN DE FILTROS ---
-// Buscamos datos desde el año 2000 por defecto para asegurar que aparezca algo
 $desde = $_GET['desde'] ?? '2000-01-01';
 $hasta = $_GET['hasta'] ?? date('Y-12-31');
 $agrupar = $_GET['agrupar'] ?? 'MONTH';
 $modo = 'graficos';
 
-// --- FUNCIONES AUXILIARES ---
-
-// 1. KPI: Conteo Simple
 function contar($conn, $tabla, $desde, $hasta)
 {
     $sql = "SELECT COUNT(*) as total FROM $tabla WHERE fecha_registro BETWEEN ? AND ?";
@@ -27,7 +22,6 @@ $kpi_mat = contar($conn, 'matrimonio', $desde, $hasta);
 $kpi_def = contar($conn, 'defuncion', $desde, $hasta);
 $kpi_uni = contar($conn, 'union_estable', $desde, $hasta);
 
-// 2. Gráfico: Top Frecuencia (con validación de array vacío)
 function obtenerTop($conn, $tabla, $columna, $desde, $hasta, $limit = 5)
 {
     $sql = "SELECT $columna as etiqueta, COUNT(*) as total 
@@ -49,7 +43,6 @@ function obtenerTop($conn, $tabla, $columna, $desde, $hasta, $limit = 5)
         $values[] = $row['total'];
     }
 
-    // Si está vacío, enviamos un array por defecto para que no rompa el JS
     if (empty($labels)) {
         return ['labels' => ['Sin datos'], 'values' => [0]];
     }
@@ -57,7 +50,6 @@ function obtenerTop($conn, $tabla, $columna, $desde, $hasta, $limit = 5)
     return ['labels' => $labels, 'values' => $values];
 }
 
-// 3. Gráfico: Evolución Temporal
 function obtenerTendencia($conn, $tabla, $agrupar, $desde, $hasta)
 {
     $sql = "SELECT $agrupar(fecha_registro) as unidad, COUNT(*) as total 
@@ -74,10 +66,6 @@ function obtenerTendencia($conn, $tabla, $agrupar, $desde, $hasta)
     return $data;
 }
 
-// --- CONSULTAS ESPECÍFICAS (CORREGIDAS) ---
-
-// A. Nacimientos por Sexo (Robustez: tomamos la primera letra mayúscula)
-// Usamos SUBSTRING(UPPER(sexo), 1, 1) para que "Masculino" y "M" cuenten igual.
 $sql_sexo_nac = "SELECT SUBSTRING(UPPER(sexo), 1, 1) as letra_sexo, COUNT(*) as total 
                  FROM nacimiento 
                  WHERE fecha_registro BETWEEN ? AND ? 
@@ -93,11 +81,9 @@ while ($r = $res_sn->fetch_assoc()) {
     if ($r['letra_sexo'] == 'F') $nac_f = $r['total'];
 }
 
-// B. Top Causas y Lugares
 $top_causas = obtenerTop($conn, 'defuncion', 'causa_defuncion', $desde, $hasta, 5);
 $top_lugares_nac = obtenerTop($conn, 'nacimiento', 'lugar_nacimiento', $desde, $hasta, 5);
 
-// C. Evolución Temporal (Líneas)
 $data_nac = obtenerTendencia($conn, 'nacimiento', $agrupar, $desde, $hasta);
 $data_mat = obtenerTendencia($conn, 'matrimonio', $agrupar, $desde, $hasta);
 $data_def = obtenerTendencia($conn, 'defuncion', $agrupar, $desde, $hasta);
@@ -111,9 +97,8 @@ $unidades = array_unique(array_merge(
 ));
 sort($unidades);
 
-// Si no hay datos temporales, creamos un punto dummy para que la gráfica no falle
 if (empty($unidades)) {
-    $unidades = [date('m')]; // Mes actual
+    $unidades = [date('m')];
 }
 
 $labels_time = array_map(function ($u) use ($agrupar) {
@@ -135,8 +120,6 @@ foreach ($unidades as $u) {
     $series_uni[] = $data_uni[$u] ?? 0;
 }
 
-// D. DEMOGRAFÍA: GRUPOS DE EDAD (Pre-llenado obligatorio)
-// Inicializamos el array con 0 para asegurar que las etiquetas existan
 $datos_edad = [
     'Niños (0-12)'     => 0,
     'Adolesc. (13-17)' => 0,
@@ -145,8 +128,6 @@ $datos_edad = [
     'Mayor (60+)'      => 0
 ];
 
-// D. DEMOGRAFÍA: GRUPOS DE EDAD (Unificado: Personas + Nacimientos)
-// Inicializamos el array en 0 para mantener el orden visual
 $datos_edad = [
     'Niños (0-12)'     => 0,
     'Adolesc. (13-17)' => 0,
@@ -155,7 +136,6 @@ $datos_edad = [
     'Mayor (60+)'      => 0
 ];
 
-// Usamos UNION para combinar personas y nacimientos sin duplicar (por ID)
 $sql_edad = "SELECT 
     CASE 
         WHEN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) BETWEEN 0 AND 12 THEN 'Niños (0-12)'
@@ -166,11 +146,11 @@ $sql_edad = "SELECT
     END as rango, 
     COUNT(*) as cantidad
     FROM (
-        -- Seleccionamos de personas
+
         SELECT id_persona, fecha_nacimiento FROM personas 
         WHERE fecha_nacimiento IS NOT NULL AND fecha_nacimiento != '0000-00-00'
         UNION
-        -- Unimos con nacimientos (el UNION elimina duplicados de ID automáticamente)
+
         SELECT id_nacido as id_persona, fecha_nacimiento FROM nacimiento 
         WHERE fecha_nacimiento IS NOT NULL AND fecha_nacimiento != '0000-00-00'
     ) as poblacion_unificada
@@ -364,7 +344,6 @@ include ROOT_PATH . 'includes/components/header.php';
         bg: ['#f1c40f', '#e67e22', '#1abc9c', '#34495e', '#95a5a6']
     };
 
-    // 1. Distribución General (Pie)
     const totalActas = <?= $kpi_nac + $kpi_mat + $kpi_def + $kpi_uni ?>;
     const pieData = totalActas > 0 ? [<?= $kpi_nac ?>, <?= $kpi_mat ?>, <?= $kpi_def ?>, <?= $kpi_uni ?>] : [0, 0, 0, 0];
 
@@ -392,8 +371,6 @@ include ROOT_PATH . 'includes/components/header.php';
         }
     });
 
-    // 2. Nacimientos por Sexo (Doughnut)
-    // Forzamos la visualización aunque sea 0 para que se vea el circulo vacio o la leyenda
     new Chart(document.getElementById('chartSexo'), {
         type: 'doughnut',
         data: {
@@ -414,7 +391,7 @@ include ROOT_PATH . 'includes/components/header.php';
         }
     });
 
-    // 3. Evolución Temporal (Line)
+
     new Chart(document.getElementById('chartLineas'), {
         type: 'line',
         data: {
@@ -464,7 +441,6 @@ include ROOT_PATH . 'includes/components/header.php';
         }
     });
 
-    // 4. Causas de Defunción
     new Chart(document.getElementById('chartCausas'), {
         type: 'bar',
         data: {
@@ -483,7 +459,6 @@ include ROOT_PATH . 'includes/components/header.php';
         }
     });
 
-    // 5. Lugares de Nacimiento
     new Chart(document.getElementById('chartLugares'), {
         type: 'bar',
         data: {
@@ -502,7 +477,6 @@ include ROOT_PATH . 'includes/components/header.php';
         }
     });
 
-    // 6. Rango de Edades (Bar)
     new Chart(document.getElementById('chartEdad'), {
         type: 'bar',
         data: {

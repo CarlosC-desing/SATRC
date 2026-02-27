@@ -1,6 +1,6 @@
 <?php
 include '../login/verificar_sesion.php';
-include '../log/registrar_log.php'; // 🕵️ Auditoría
+include '../log/registrar_log.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tipo_acta = $_POST['tipo_acta'];
@@ -18,4 +18,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     exit();
 }
-?>

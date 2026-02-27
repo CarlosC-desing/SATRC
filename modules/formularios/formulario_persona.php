@@ -143,14 +143,14 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
     document.addEventListener('DOMContentLoaded', () => {
         const form = document.getElementById('form-persona');
 
-        // Validación numérica estricta
+
         document.querySelectorAll('.validate-number').forEach(input => {
             input.addEventListener('input', function() {
                 this.value = this.value.replace(/[^0-9]/g, '');
             });
         });
 
-        // Validación de texto con Formato de Nombres Propios
+
         document.querySelectorAll('.validate-text').forEach(input => {
             input.addEventListener('input', function() {
                 this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s']/g, '')

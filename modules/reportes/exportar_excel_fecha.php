@@ -1,44 +1,37 @@
 <?php
-// 1. INICIALIZACIÓN Y CONFIGURACIÓN
+
 require_once '../../includes/db/config.php';
 include ROOT_PATH . 'modules/login/verificar_sesion.php';
 include ROOT_PATH . 'includes/db/conexion.php';
 
-// 2. RECIBIR PARÁMETROS
 $tipo   = $_GET['tipo'] ?? '';
 $origen = $_GET['origen'] ?? 'general';
 $desde  = $_GET['desde'] ?? '';
 $hasta  = $_GET['hasta'] ?? '';
 
-// Si no hay tipo, detenemos todo
 if (!$tipo) {
     die("Error: No se especificó el tipo de reporte.");
 }
 
-// Ajuste de horas para filtro de registro
 if ($origen == 'registro') {
     $desde = $desde ? $desde . ' 00:00:00' : '';
     $hasta = $hasta ? $hasta . ' 23:59:59' : '';
 }
 
-// 3. HEADERS PARA EXCEL
 header("Content-Type: application/vnd.ms-excel; charset=utf-8");
 header("Content-Disposition: attachment; filename=reporte_{$tipo}_" . date('Y-m-d') . ".xls");
 header("Pragma: no-cache");
 header("Expires: 0");
 
-// BOM para UTF-8 (Tildes y Ñ correctas)
 echo "\xEF\xBB\xBF";
 
-// 4. ESTILOS CSS INCRUSTADOS PARA LA TABLA
 $style_header = "background-color: #2b388f; color: #ffffff; font-weight: bold; border: 1px solid #000000;";
 $style_cell   = "border: 1px solid #000000; vertical-align: middle;";
 
 echo "<table border='1'>";
 
-// 5. CONSTRUCCIÓN DE LA CONSULTA SQL
 $sql = "";
-$columnas_excel = []; // Define qué mostrar en el TH
+$columnas_excel = [];
 
 switch ($tipo) {
     case 'nacimiento':
@@ -105,19 +98,16 @@ switch ($tipo) {
         break;
 }
 
-// Agregar filtro de fecha si aplica
 if ($origen != 'general' && $desde && $hasta) {
     $sql .= " WHERE $col_fecha BETWEEN '$desde' AND '$hasta'";
 }
 
-// 6. IMPRIMIR ENCABEZADOS
 echo "<tr>";
 foreach ($columnas_excel as $th) {
     echo "<th style='$style_header'>$th</th>";
 }
 echo "</tr>";
 
-// 7. EJECUTAR Y MOSTRAR DATOS
 $result = $conn->query($sql);
 
 if ($result && $result->num_rows > 0) {

@@ -12,7 +12,6 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
 ?>
 <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/estilos_formularios.css">
 <style>
-    /* Estilos Acordeón */
     details {
         background: #f8f9fa;
         margin-bottom: 10px;
@@ -400,7 +399,7 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Lógica de Modos (Original)
+
         const modo = document.getElementById('modo_registro');
         const secCel = document.getElementById('sec-celebracion');
         const secIns = document.getElementById('sec-insercion');
@@ -419,12 +418,11 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
         }
         modo.addEventListener('change', actualizarModo);
 
-        // Lógica Capitulaciones
         document.getElementById('tiene_cap').addEventListener('change', function() {
             document.getElementById('sec-cap-datos').classList.toggle('hidden-section', this.value === 'NO');
         });
 
-        // Lógica Estados Civiles
+
         const manejarEdo = (selId, divId, viuId) => {
             const sel = document.getElementById(selId);
             sel.addEventListener('change', () => {
@@ -435,7 +433,7 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
         manejarEdo('sel_c1', 'c1_div', 'c1_viu');
         manejarEdo('sel_c2', 'c2_div', 'c2_viu');
 
-        // Búsqueda y Submit Standard
+
         document.querySelectorAll('.cedula-lookup').forEach(input => {
             input.addEventListener('blur', function() {
                 const val = this.value.trim();

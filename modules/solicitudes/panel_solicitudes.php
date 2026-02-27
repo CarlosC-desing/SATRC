@@ -9,7 +9,6 @@ $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $por_pagina = 20;
 $inicio = ($pagina - 1) * $por_pagina;
 
-// --- 1. Estadísticas de estados ---
 $stats = ['pendiente' => 0, 'en_proceso' => 0, 'entregada' => 0];
 $stat_query = $conn->query("SELECT estado, COUNT(*) AS total FROM solicitudes_actas GROUP BY estado");
 if ($stat_query) {
@@ -18,7 +17,6 @@ if ($stat_query) {
     }
 }
 
-// --- 2. Estadísticas por tipo de acta ---
 $por_tipo = [];
 $tipo_query = $conn->query("SELECT tipo_acta, COUNT(*) AS total FROM solicitudes_actas GROUP BY tipo_acta");
 if ($tipo_query) {
@@ -27,7 +25,6 @@ if ($tipo_query) {
     }
 }
 
-// --- 3. Procesar Actualización de Estado ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_solicitud']) && isset($_POST['nuevo_estado'])) {
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         die("Error de validación de seguridad (CSRF).");
@@ -48,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_solicitud']) && is
     exit;
 }
 
-// --- 4. Consulta Principal (Incluye Cédula) ---
 $sql_base = "SELECT s.id_solicitud, s.tipo_acta, s.motivo, s.fecha_solicitud, s.estado, p.cedula,
                     CONCAT(p.primer_nombre, ' ', p.primer_apellido) AS solicitante
              FROM solicitudes_actas s
@@ -132,7 +128,6 @@ include ROOT_PATH . 'includes/components/header.php';
                 <tbody>
                     <?php if ($result && $result->num_rows > 0): ?>
                         <?php while ($row = $result->fetch_assoc()):
-                            // Corrección para nombres con apóstrofes o caracteres especiales
                             $nombre_limpio = htmlspecialchars(htmlspecialchars_decode($row['solicitante'], ENT_QUOTES), ENT_QUOTES, 'UTF-8');
                         ?>
                             <tr class="solicitudes-table__tr--<?= htmlspecialchars($row['estado']) ?>">

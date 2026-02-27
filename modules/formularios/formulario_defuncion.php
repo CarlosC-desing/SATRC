@@ -161,7 +161,7 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
         const seccionManual = document.getElementById('filiacion-manual');
         const lookupInputs = document.querySelectorAll('.req-lookup');
 
-        // Lógica para alternar modos
+
         botonesModo.forEach(boton => {
             boton.addEventListener('click', function() {
                 botonesModo.forEach(b => b.classList.remove('active'));
@@ -177,7 +177,6 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
             });
         });
 
-        // Feedback de búsqueda por cédula
         document.querySelectorAll('.cedula-lookup').forEach(input => {
             input.addEventListener('blur', function() {
                 const cedula = this.value.trim();
@@ -202,7 +201,6 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
             });
         });
 
-        // Envío AJAX
         document.getElementById('form-defuncion').addEventListener('submit', function(e) {
             e.preventDefault();
             fetch('procesar_defuncion.php', {

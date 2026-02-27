@@ -12,7 +12,6 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
 ?>
 <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/estilos_formularios.css">
 <style>
-    /* Estilos Acordeón (Mismos que matrimonio) */
     details {
         background: #f8f9fa;
         margin-bottom: 10px;
@@ -24,7 +23,6 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
     details summary {
         background: #d35400;
         color: white;
-        /* Color Diferente para diferenciar de matrimonio */
         padding: 12px;
         font-weight: bold;
         cursor: pointer;
@@ -289,7 +287,7 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Lógica de Modos
+
         const modo = document.getElementById('tipo_operacion');
         const secUnion = document.getElementById('sec-union');
         const secIns = document.getElementById('sec-insercion');
@@ -307,7 +305,7 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
         }
         modo.addEventListener('change', actualizarModo);
 
-        // Lógica Estados Civiles
+
         const manejarEdo = (selId, divId, viuId) => {
             const sel = document.getElementById(selId);
             sel.addEventListener('change', () => {
@@ -318,7 +316,7 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
         manejarEdo('sel_d1', 'd1_div', 'd1_viu');
         manejarEdo('sel_d2', 'd2_div', 'd2_viu');
 
-        // Búsqueda Standard
+
         document.querySelectorAll('.cedula-lookup').forEach(input => {
             input.addEventListener('blur', function() {
                 const val = this.value.trim();
@@ -335,7 +333,7 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
             });
         });
 
-        // Envío AJAX
+
         document.getElementById('form-union').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = this.querySelector('button');

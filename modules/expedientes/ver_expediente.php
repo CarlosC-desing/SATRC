@@ -1,5 +1,4 @@
 <?php
-// Ajustamos ruta: Salimos de 'modules/expedientes' (../../) para llegar a 'includes'
 require_once '../../includes/db/config.php';
 include ROOT_PATH . 'modules/login/verificar_sesion.php';
 include ROOT_PATH . 'includes/db/conexion.php';
@@ -11,7 +10,7 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 }
 $id_persona = (int)$_GET['id'];
 
-// Obtener datos de la persona
+
 $stmt = $conn->prepare("SELECT primer_nombre, primer_apellido, cedula FROM personas WHERE id_persona = ?");
 $stmt->bind_param("i", $id_persona);
 $stmt->execute();

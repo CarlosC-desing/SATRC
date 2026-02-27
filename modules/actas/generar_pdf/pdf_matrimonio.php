@@ -5,18 +5,14 @@ include '../../../includes/db/conexion.php';
 
 use Mpdf\HTMLParserMode;
 
-// 1. VALIDACIÓN Y CONSULTA DE DATOS
 $num_acta = $_GET['numero_acta'] ?? '';
 
 if (empty($num_acta)) {
     die("Error: No se especificó el número de acta.");
 }
 
-// 2. CONSULTA ACTUALIZADA (SNAPSHOT + RELACIONES)
-// Se mantienen los datos personales base de la tabla 'personas', pero se priorizan los datos
-// congelados (Snapshot) de la tabla 'matrimonio' para lo que cambia (profesión, residencia, estado civil).
 $sql = "SELECT m.*, 
-        -- Esposo (u1)
+
         p1.primer_nombre as u1_n1, p1.segundo_nombre as u1_n2, p1.primer_apellido as u1_a1, p1.segundo_apellido as u1_a2, 
         p1.cedula as u1_ced, p1.fecha_nacimiento as u1_fnac, p1.nacionalidad as u1_nac,
         p1.pais_nacimiento as u1_pais, p1.estado_nacimiento as u1_edo, p1.municipio_nacimiento as u1_mun, p1.parroquia_nacimiento as u1_par,

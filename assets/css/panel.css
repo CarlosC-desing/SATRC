@@ -47,13 +47,13 @@ body {
 
 .solicitudes-table {
   width: 100%;
-  border-collapse: separate; /* Obligatorio para que funcione el radius */
-  border-spacing: 0; /* Elimina el espacio entre celdas */
+  border-collapse: separate;
+  border-spacing: 0;
   background: white;
   margin-top: 20px;
-  border-radius: 15px; /* El radio que desees */
-  overflow: hidden; /* Corta las celdas para que sigan la curva */
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* Tu sombra suave */
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 .solicitudes-table__th,
 .solicitudes-table__td {
@@ -105,15 +105,12 @@ body {
   cursor: pointer;
 }
 
-/* --- NUEVOS CAMBIOS: LAYOUT Y SIDEBAR --- */
-
 .panel-layout {
   width: 100%;
   display: flex;
   gap: 20px;
 }
 
-/* Sidebar de Filtros */
 .panel-sidebar {
   width: 240px;
   height: 88vh;
@@ -143,7 +140,6 @@ body {
   font-size: 30px;
 }
 
-/* Contenido Principal (Ajuste del main) */
 .panel-main {
   padding: 20px;
   border-radius: 5px;
@@ -154,7 +150,6 @@ body {
   color: white;
 }
 
-/* Ajustes específicos para el formulario dentro del sidebar */
 .filter-form__btn-apply {
   width: 100%;
   align-self: center;
@@ -183,7 +178,6 @@ body {
   text-align: center;
 }
 
-/* Resumen estadístico en sidebar */
 .panel-sidebar__summary {
   color: white;
 }
@@ -196,7 +190,6 @@ body {
   display: flex;
   gap: 30px;
 }
-/* Estilos mejorados para el Formulario de Registro */
 .main-registro__title {
   color: white;
   margin-bottom: 20px;
@@ -270,20 +263,19 @@ body {
   border: 1px solid #eee;
 }
 .solicitudes-table__textarea-scroll {
-  width: 150px; /* Ancho fijo para proteger las otras columnas */
-  height: 20px; /* Altura fija para que todas las filas sean iguales */
+  width: 150px;
+  height: 20px;
   border: none;
   background: transparent;
-  resize: none; /* Evita que el usuario cambie el tamaño */
+  resize: none;
   font-family: inherit;
   font-size: 0.9rem;
   color: #333;
   outline: none;
   padding: 5px;
-  scrollbar-width: thin; /* Hace el scroll más estético en Firefox */
+  scrollbar-width: thin;
 }
 
-/* Opcional: Estilo para el scrollbar en Chrome/Safari */
 .solicitudes-table__textarea-scroll::-webkit-scrollbar {
   width: 6px;
 }

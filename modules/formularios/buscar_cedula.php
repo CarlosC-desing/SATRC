@@ -1,5 +1,5 @@
 <?php
-// Limpiar cualquier salida previa (como errores de sesión) para que no se peguen al copiar
+
 ob_clean();
 header('Content-Type: text/html; charset=utf-8');
 

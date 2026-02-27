@@ -3,42 +3,34 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   height: 100vh;
   font-family: "Roboto";
 }
-
-/* --- Layout Base --- */
 .fondo {
   height: 85vh;
   display: flex;
   position: relative;
   z-index: 0;
 }
-
 .azul {
   background-color: #2b388f;
   width: 75%;
 }
-
 .blanco {
   background-color: white;
   width: 25%;
 }
-
 .bandera {
   position: absolute;
   width: 100%;
   top: 20px;
 }
-
 .flag {
   position: absolute;
   z-index: 1;
   width: 100%;
 }
-
 .escudo {
   position: fixed;
   z-index: 2;
@@ -46,7 +38,6 @@ body {
   top: 5px;
   left: 15px;
 }
-
 .all {
   position: absolute;
   top: 140px;
@@ -56,42 +47,33 @@ body {
   display: flex;
   height: 50vh;
 }
-
-/* --- Sección de Texto Izquierda --- */
 .info {
   width: 58%;
   color: white;
 }
-
 .info > h1 {
   font-size: 65px;
   text-transform: uppercase;
 }
-
 .info > h2 {
   font-size: 43px;
   margin-bottom: 50px;
   font-weight: 100;
 }
-
 .info > p {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 10px;
 }
-
 .info > ul {
   font-size: 18px;
   margin-left: 20px;
   font-weight: 100;
 }
-
-/* --- Sección del Formulario --- */
 .form {
   width: 42%;
   padding-top: 10px;
 }
-
 .formulario {
   border: 1px solid white;
   background-color: white;
@@ -104,7 +86,6 @@ body {
   align-items: center;
   padding: 15px 40px;
 }
-
 .formulario > h3 {
   text-transform: uppercase;
   color: #2b388f;
@@ -113,7 +94,6 @@ body {
   margin-top: 10px;
   margin-bottom: 20px;
 }
-
 .input-group {
   display: flex;
   align-items: center;
@@ -125,7 +105,6 @@ body {
   padding: 0 20px;
   overflow: hidden;
 }
-
 .icon-container {
   width: 30px;
   height: 30px;
@@ -135,21 +114,18 @@ body {
   margin-right: 15px;
   flex-shrink: 0;
 }
-
 .icon-container img {
   width: 60%;
   height: 60%;
   object-fit: contain;
   fill: white;
 }
-
-/* --- Inputs corregidos --- */
 .input-group input {
   background: transparent !important;
   border: none !important;
   color: white !important;
   font-size: 20px !important;
-  line-height: 65px !important; /* 👈 centrado vertical */
+  line-height: 65px !important;
   width: 100%;
   height: 100% !important;
   outline: none !important;
@@ -159,20 +135,16 @@ body {
   -webkit-appearance: none;
   box-shadow: none !important;
 }
-
 .input-group input:focus,
 .input-group input:active {
   font-size: 20px !important;
-  line-height: 65px !important; /* 👈 evita salto */
+  line-height: 65px !important;
   outline: none !important;
 }
-
 .input-group input::placeholder {
   font-size: 20px !important;
   color: rgba(255, 255, 255, 0.8);
 }
-
-/* --- Autocompletado corregido --- */
 .input-group input:-webkit-autofill,
 .input-group input:-webkit-autofill:hover,
 .input-group input:-webkit-autofill:focus {
@@ -182,8 +154,6 @@ body {
   line-height: 65px !important;
   transition: background-color 5000s ease-in-out 0s;
 }
-
-/* --- Botón --- */
 .formulario > button {
   background-color: #2b388f;
   width: 40%;
@@ -197,12 +167,9 @@ body {
   margin-top: 10px;
   transition: background 0.3s;
 }
-
 .formulario > button:hover {
   background-color: #1a235a;
 }
-
-/* --- Footer --- */
 .footer {
   height: 15vh;
   width: 100%;

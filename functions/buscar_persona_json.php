@@ -1,5 +1,4 @@
 <?php
-// Archivo: functions/buscar_persona_json.php
 include '../includes/db/config.php';
 include '../includes/db/conexion.php';
 
@@ -12,7 +11,6 @@ if (empty($cedula)) {
     exit;
 }
 
-// Busca nombre y apellido
 $sql = "SELECT primer_nombre, primer_apellido FROM personas WHERE cedula = ? LIMIT 1";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $cedula);

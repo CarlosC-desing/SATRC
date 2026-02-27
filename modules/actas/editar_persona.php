@@ -128,7 +128,6 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
         const soloLetras = /[^A-Za-zÁÉÍÓÚáéíóúÑñ\s']/g;
         const camposCapitalizar = ['primer_nombre', 'segundo_nombre', 'tercer_nombre', 'primer_apellido', 'segundo_apellido', 'profesion', 'residencia'];
 
-        // Capitalización automática
         camposCapitalizar.forEach(id => {
             const inp = document.getElementById(id);
             if (inp) {
@@ -141,7 +140,6 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
             }
         });
 
-        // Envío por AJAX
         formUpdate.addEventListener('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(this);
@@ -152,11 +150,8 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
                 })
                 .then(response => response.json())
                 .then(data => {
-                    alert(data.message); // Aquí sale el Alert indicando el resultado
-                    if (data.status === 'success') {
-                        // Opcional: recargar la página para ver cambios frescos
-                        // location.reload(); 
-                    }
+                    alert(data.message);
+                    if (data.status === 'success') {}
                 })
                 .catch(error => {
                     console.error('Error:', error);

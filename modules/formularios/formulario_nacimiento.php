@@ -78,7 +78,6 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
         color: #e74c3c;
     }
 
-    /* Nuevos estilos para campos extra */
     .extra-info {
         font-size: 0.9em;
         color: #666;
@@ -362,19 +361,18 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- VALIDACION DE FECHAS ---
+
         const fechaNac = document.getElementById('nacido_fecha');
         const fechaReg = document.getElementById('fecha_registro');
 
         function validarFechas() {
             if (fechaNac.value) {
-                // La fecha de registro no puede ser menor a la de nacimiento
+
                 fechaReg.min = fechaNac.value;
             }
         }
         fechaNac.addEventListener('change', validarFechas);
 
-        // --- LOGICA EXISTENTE DE MODO ---
         const modo = document.getElementById('modo_registro');
         const secH = document.getElementById('sec-h');
         const secI = document.getElementById('sec-i');
@@ -408,7 +406,7 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
         modo.addEventListener('change', actualizarModo);
         actualizarModo();
 
-        // --- BUSQUEDA AJAX ---
+
         document.querySelectorAll('.cedula-lookup').forEach(input => {
             input.addEventListener('blur', function() {
                 const cedula = this.value.trim();
@@ -425,7 +423,7 @@ include '../../includes/components/sidebar_busqueda_cedula.php';
             });
         });
 
-        // --- ENVIO FORMULARIO ---
+
         document.getElementById('form-nacimiento').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = this.querySelector('button');

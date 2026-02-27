@@ -3,7 +3,7 @@ $tipos = $_GET['tipo'] ?? [];
 $desde = $_GET['desde'] ?? '';
 $hasta = $_GET['hasta'] ?? '';
 
-// Aseguramos que sea un array
+
 if (!is_array($tipos)) $tipos = [$tipos];
 ?>
 
@@ -26,7 +26,6 @@ if (!is_array($tipos)) $tipos = [$tipos];
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             <?php foreach ($tipos as $tipo): ?>
-                // Modo 'fecha' con el rango seleccionado
                 cargarTabla('<?= $tipo ?>', 'fecha', '<?= $desde ?>', '<?= $hasta ?>', 1);
             <?php endforeach; ?>
         });

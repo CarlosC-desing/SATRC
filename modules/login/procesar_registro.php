@@ -1,5 +1,4 @@
 <?php
-// Configuración y Sesión
 require_once '../../includes/db/config.php';
 include_once '../../includes/db/conexion.php';
 include_once '../../functions/registrar_log.php';
@@ -33,7 +32,7 @@ if (empty($nombre) || !$email || empty($password_raw) || empty($rol)) {
     exit();
 }
 
-// Validar que el rol sea uno de los permitidos (Lista blanca)
+// Validar que el rol sea uno de los permitidos
 $roles_permitidos = ['admin', 'usuario'];
 if (!in_array($rol, $roles_permitidos)) {
     echo "<script>alert('❌ Rol seleccionado no válido'); window.history.back();</script>";
@@ -46,8 +45,6 @@ $password_hash = password_hash($password_raw, PASSWORD_DEFAULT);
 // 5. INSERCIÓN: Consulta preparada y manejo de errores seguro
 $sql = "INSERT INTO Usuarios (nombre, email, contraseña, rol) VALUES (?, ?, ?, ?)";
 
-/* Usamos un bloque try-catch si la conexión está configurada para lanzar excepciones,
-   o verificamos el resultado de execute() si no. Aquí usaremos un enfoque híbrido seguro. */
 
 try {
     $stmt = $conn->prepare($sql);
@@ -58,9 +55,6 @@ try {
     $stmt->bind_param("ssss", $nombre, $email, $password_hash, $rol);
 
     if ($stmt->execute()) {
-        // --- ÉXITO ---
-
-        // Registrar en bitácora
         $usuario_admin = $_SESSION['usuario'];
         $detalle = "Creó usuario: $email con rol: $rol";
         registrarLog($conn, $usuario_admin, "Usuarios", "Creación", $detalle);
@@ -71,23 +65,19 @@ try {
         </script>";
         exit();
     } else {
-        // Error en ejecución (ej: correo duplicado)
         throw new Exception($stmt->error, $stmt->errno);
     }
 
     $stmt->close();
 } catch (Exception $e) {
-    // --- MANEJO DE ERROR SEGURO ---
 
-    // Si el error es por duplicado (código 1062 en MySQL)
     if ($e->getCode() == 1062) {
         echo "<script>
             alert('❌ El correo electrónico ya está registrado.');
             window.history.back();
         </script>";
     } else {
-        // Cualquier otro error: LO GUARDAMOS EN LOG INTERNO y mostramos mensaje genérico
-        error_log("Error DB en procesar_registro.php: " . $e->getMessage()); // Esto va al archivo error.log del servidor
+        error_log("Error DB en procesar_registro.php: " . $e->getMessage());
 
         echo "<script>
             alert('❌ Ocurrió un error interno al procesar la solicitud. Contacte a soporte.');

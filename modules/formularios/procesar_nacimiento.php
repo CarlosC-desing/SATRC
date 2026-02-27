@@ -11,7 +11,6 @@ if (ob_get_length()) ob_clean();
 header('Content-Type: application/json');
 mysqli_report(MYSQLI_REPORT_OFF);
 
-// --- FUNCIONES AUXILIARES ---
 function obtenerIdPorCedula($conn, $cedula)
 {
     if (empty($cedula)) return NULL;
@@ -36,7 +35,7 @@ function obtenerApellidosPersona($conn, $id)
 }
 
 try {
-    // 1. VALIDACIÓN DE SEGURIDAD: ACTA DUPLICADA
+
     $num_acta = trim($_POST['numero_acta']);
     if (empty($num_acta)) throw new Exception("El número de acta es obligatorio.");
 
@@ -52,11 +51,11 @@ try {
     }
     $checkStmt->close();
 
-    // INICIO TRANSACCIÓN
+
     $conn->begin_transaction();
     $usuario_sesion = $_SESSION['usuario'];
 
-    // 2. RECUPERAR INTERVINIENTES
+
     $id_registrador = obtenerIdPorCedula($conn, $_POST['cedula_registrador']);
     $id_declarante  = obtenerIdPorCedula($conn, $_POST['cedula_declarante']);
 
@@ -71,38 +70,35 @@ try {
 
     if (!$id_madre) throw new Exception("Error: La cédula de la madre es obligatoria y debe estar registrada.");
 
-    // 3. LÓGICA DE APELLIDOS AUTOMÁTICA
+
     $datos_madre = obtenerApellidosPersona($conn, $id_madre);
     $p_apellido = "";
     $s_apellido = "";
 
     if ($id_padre) {
-        // CON PADRE: 1er Apellido Padre + 1er Apellido Madre
+
         $datos_padre = obtenerApellidosPersona($conn, $id_padre);
         $p_apellido = $datos_padre['primer_apellido'];
         $s_apellido = $datos_madre['primer_apellido'];
     } else {
-        // MADRE SOLTERA: 1er Apellido Madre + 2do Apellido Madre
+
         $p_apellido = $datos_madre['primer_apellido'];
         $s_apellido = $datos_madre['segundo_apellido'];
     }
 
-    // 4. DATOS DEL NIÑO (Corregido para recibir inputs separados)
+
     $p_nombre = isset($_POST['nacido_primer_nombre']) ? trim($_POST['nacido_primer_nombre']) : '';
     $s_nombre = isset($_POST['nacido_segundo_nombre']) ? trim($_POST['nacido_segundo_nombre']) : '';
 
     if (empty($p_nombre)) throw new Exception("El primer nombre del nacido es obligatorio.");
 
-    // 5. CORRECCIÓN DEL SEXO (Solución definitiva)
-    // Toma lo que llegue, quita espacios, convierte a mayúsculas y verifica la primera letra.
     $sexo_raw = strtoupper(trim($_POST['nacido_sexo'] ?? ''));
 
     if (empty($sexo_raw)) throw new Exception("Debe seleccionar el sexo del nacido.");
 
-    // Si empieza por 'M' (M, Masculino, MASCULINO) asigna 'M', sino 'F'
     $sexo_final = (strpos($sexo_raw, 'M') === 0) ? 'M' : 'F';
 
-    // 6. INSERTAR PERSONA (RECIÉN NACIDO)
+
     $sql_persona = "INSERT INTO personas (primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, sexo, fecha_nacimiento) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt_p = $conn->prepare($sql_persona);
     $stmt_p->bind_param("ssssss", $p_nombre, $s_nombre, $p_apellido, $s_apellido, $sexo_final, $_POST['nacido_fecha']);
@@ -112,7 +108,6 @@ try {
     }
     $id_nacido = $conn->insert_id;
 
-    // 7. PREPARAR DATOS ESPECIALES (JSON)
     $modo = $_POST['modo_registro'];
     $datos_especiales = [];
     switch ($modo) {
@@ -131,7 +126,6 @@ try {
     }
     $json_especial = !empty($datos_especiales) ? json_encode($datos_especiales, JSON_UNESCAPED_UNICODE) : null;
 
-    // 8. INSERTAR ACTA DE NACIMIENTO
     $sql = "INSERT INTO nacimiento (
         numero_acta, fecha_registro, id_registrador, id_nacido, resolucion_numero, gaceta_numero,
         primer_nombre, segundo_nombre, primer_apellido, segundo_apellido,
@@ -148,10 +142,10 @@ try {
 
     $stmt = $conn->prepare($sql);
 
-    // Total: 38 variables
+
     $stmt->bind_param(
         "ssiisssssssssssssssississisississsssss",
-        $num_acta,                  // 1. Validado al inicio
+        $num_acta,
         $_POST['fecha_registro'],
         $id_registrador,
         $id_nacido,
@@ -161,7 +155,7 @@ try {
         $s_nombre,
         $p_apellido,
         $s_apellido,
-        $sexo_final,                // 11. Sexo corregido
+        $sexo_final,
         $_POST['nacido_fecha'],
         $_POST['nacido_hora'],
         $_POST['nacido_lugar'],
@@ -192,7 +186,6 @@ try {
     );
 
     if (!$stmt->execute()) {
-        // Si el error es por duplicado (código 1062), lanzamos excepción clara
         if ($conn->errno == 1062) {
             throw new Exception("Error: El número de acta o cédula ya está registrado (Duplicado).");
         }

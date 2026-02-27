@@ -18,8 +18,6 @@ $id_persona_consulta = isset($_GET['id']) && is_numeric($_GET['id']) ? (int)$_GE
 <div class="main__content" id="main-content">
     <?php
     if ($id_persona_consulta) {
-        // --- CONSULTA UNIFICADA DE ACTAS ---
-        // Se buscan actas donde la persona aparezca como protagonista (Nacido, Difunto, Esposo/a, Unido/a)
 
         $sql = "
             /* 1. NACIMIENTO (Usando la nueva columna id_nacido) */
@@ -71,7 +69,6 @@ $id_persona_consulta = isset($_GET['id']) && is_numeric($_GET['id']) ? (int)$_GE
 
         $stmt = $conn->prepare($sql);
 
-        // Vinculamos 6 parámetros (uno por cada SELECT del UNION)
         $stmt->bind_param(
             "iiiiii",
             $id_persona_consulta,
@@ -95,7 +92,6 @@ $id_persona_consulta = isset($_GET['id']) && is_numeric($_GET['id']) ? (int)$_GE
 
                 $nombre_decode = htmlspecialchars_decode($row['nombre']);
 
-                // Selección de ruta PDF según el tipo
                 $ruta_pdf = match (strtolower($tipo)) {
                     'nacimiento' => 'generar_pdf/pdf_nacimiento.php',
                     'matrimonio' => 'generar_pdf/pdf_matrimonio.php',
@@ -128,7 +124,6 @@ $id_persona_consulta = isset($_GET['id']) && is_numeric($_GET['id']) ? (int)$_GE
         echo "<br><a href='buscar.php' class='form__button'>Volver a la búsqueda</a>";
         $stmt->close();
     } else {
-        // --- FORMULARIO DE BÚSQUEDA ---
         $columnas_permitidas = ['cedula', 'primer_nombre', 'segundo_nombre', 'primer_apellido', 'segundo_apellido'];
         $filtros_activos = [];
 

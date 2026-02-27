@@ -1,19 +1,16 @@
 <?php
-// modules/reportes/ajax_tablas.php
 require_once '../../includes/db/config.php';
 include ROOT_PATH . 'modules/login/verificar_sesion.php';
 include ROOT_PATH . 'includes/db/conexion.php';
 
-// Recibir parámetros
 $tipo       = $_REQUEST['tipo'] ?? '';
-$origen     = $_REQUEST['origen'] ?? 'general'; // general, fecha, registro
+$origen     = $_REQUEST['origen'] ?? 'general';
 $pagina     = isset($_REQUEST['pagina']) ? (int)$_REQUEST['pagina'] : 1;
 $desde      = $_REQUEST['desde'] ?? '';
 $hasta      = $_REQUEST['hasta'] ?? '';
 $por_pagina = 10;
 $inicio     = ($pagina - 1) * $por_pagina;
 
-// Ajuste de fechas para reporte 'registro'
 if ($origen == 'registro') {
     $desde = $desde ? $desde . ' 00:00:00' : '';
     $hasta = $hasta ? $hasta . ' 23:59:59' : '';
@@ -23,7 +20,6 @@ $sql = "";
 $columnas = [];
 $titulo = "";
 
-// --- LÓGICA SQL POR TIPO ---
 switch ($tipo) {
     case 'nacimiento':
         $columnas = ['numero_acta' => 'N° Acta', 'cedula' => 'Cédula', 'nombre' => 'Nombre Completo'];
@@ -101,13 +97,11 @@ switch ($tipo) {
         break;
 }
 
-// --- GENERAR HTML DE RESPUESTA ---
 if ($sql) {
-    // 1. Contar total
+
     $total_result = $conn->query($sql);
     $total = $total_result ? $total_result->num_rows : 0;
 
-    // 2. Obtener datos paginados
     $sql .= " LIMIT $inicio, $por_pagina";
     $result = $conn->query($sql);
 
@@ -133,22 +127,18 @@ if ($sql) {
     }
     echo "</tbody></table></div>";
 
-    // --- PAGINACIÓN INTELIGENTE (AJAX) ---
     $total_paginas = ceil($total / $por_pagina);
     if ($total_paginas > 1) {
         echo "<div class='paginacion'>";
 
-        // Llamada JS: cargarTabla('nacimiento', 'general', '', '', 2)
         $js_args = "'$tipo', '$origen', '$desde', '$hasta'";
 
-        // Botón Anterior
         if ($pagina > 1) {
             echo "<button onclick=\"cargarTabla($js_args, " . ($pagina - 1) . ")\" class='btn-nav'>&laquo; Anterior</button>";
         } else {
             echo "<button class='btn-nav disabled' disabled>&laquo; Anterior</button>";
         }
 
-        // Números Inteligentes
         $rango = 2;
         for ($i = 1; $i <= $total_paginas; $i++) {
             if ($i == 1 || $i == $total_paginas || ($i >= $pagina - $rango && $i <= $pagina + $rango)) {
@@ -159,7 +149,6 @@ if ($sql) {
             }
         }
 
-        // Botón Siguiente
         if ($pagina < $total_paginas) {
             echo "<button onclick=\"cargarTabla($js_args, " . ($pagina + 1) . ")\" class='btn-nav'>Siguiente &raquo;</button>";
         } else {

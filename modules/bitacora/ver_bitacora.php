@@ -8,25 +8,24 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
     die("🔒 Acceso restringido.");
 }
 
-// IMPORTANTE: Estos valores deben ser IDÉNTICOS a lo que hay en la columna 'modulo' de tu BD.
+
 $modulos_disponibles = ['Personas', 'Solicitudes', 'Nacimiento', 'Matrimonio', 'Defunción', 'Unión Estable', 'Expediente'];
 
-// Configuración de Paginación
+
 $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $por_pagina = 50;
 $inicio = ($pagina - 1) * $por_pagina;
 
-// Lógica del Filtro
+
 $condicion = '';
 $params_filtro = [];
 $types = "";
 
-// Verificamos si hay módulos seleccionados
 if (!empty($_GET['modulo']) && is_array($_GET['modulo'])) {
-    // Saneamiento básico del array
+
     $filtros_limpios = array_map('strip_tags', $_GET['modulo']);
 
-    // Creamos los placeholders (?,?,?) dinámicamente
+
     $placeholders = implode(',', array_fill(0, count($filtros_limpios), '?'));
     $condicion = "WHERE modulo IN ($placeholders)";
 
@@ -34,12 +33,12 @@ if (!empty($_GET['modulo']) && is_array($_GET['modulo'])) {
     $types = str_repeat("s", count($params_filtro));
 }
 
-// 1. Consulta Principal
+
 $sql = "SELECT * FROM historial_cambios $condicion ORDER BY fecha DESC LIMIT ?, ?";
 $stmt = $conn->prepare($sql);
 
 if (!empty($params_filtro)) {
-    // Unimos los filtros con los límites de paginación
+
     $final_params = array_merge($params_filtro, [$inicio, $por_pagina]);
     $stmt->bind_param($types . "ii", ...$final_params);
 } else {
@@ -49,7 +48,6 @@ if (!empty($params_filtro)) {
 $stmt->execute();
 $result = $stmt->get_result();
 
-// 2. Consulta de Conteo (Total de páginas)
 $sql_total = "SELECT COUNT(*) AS total FROM historial_cambios $condicion";
 $stmt_t = $conn->prepare($sql_total);
 if (!empty($params_filtro)) {
@@ -60,8 +58,7 @@ $total_res = $stmt_t->get_result();
 $total = $total_res ? $total_res->fetch_assoc()['total'] : 0;
 $total_pag = ceil($total / $por_pagina);
 
-// Generar Query String para mantener los filtros en los links de paginación
-// Si no hay filtros, esto devuelve cadena vacía
+
 $query_string_filtros = '';
 if (!empty($_GET['modulo'])) {
     $query_string_filtros = '&' . http_build_query(['modulo' => $_GET['modulo']]);

@@ -14,7 +14,6 @@ if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_tok
 
 $id = $_POST['id_persona'];
 
-// 1. Obtener la cédula actual para protegerla
 $query_actual = $conn->prepare("SELECT cedula FROM personas WHERE id_persona = ?");
 $query_actual->bind_param("i", $id);
 $query_actual->execute();
@@ -22,12 +21,10 @@ $cedula_db = $query_actual->get_result()->fetch_assoc()['cedula'];
 
 $nueva_cedula = !empty($_POST['cedula']) ? $_POST['cedula'] : null;
 
-// 2. Protección: Si ya existe en DB, ignoramos lo que venga del POST para que no cambie
+
 if (!empty($cedula_db)) {
     $nueva_cedula = $cedula_db;
-}
-// 3. Si es nueva, validamos duplicados
-elseif (!empty($nueva_cedula)) {
+} elseif (!empty($nueva_cedula)) {
     $verificar = $conn->prepare("SELECT id_persona FROM personas WHERE cedula = ? AND id_persona != ?");
     $verificar->bind_param("si", $nueva_cedula, $id);
     $verificar->execute();
@@ -37,7 +34,6 @@ elseif (!empty($nueva_cedula)) {
     }
 }
 
-// Preparamos los campos (Asegúrate de que coincidan con tu DB)
 $campos = [
     'primer_nombre'    => $_POST['primer_nombre'],
     'segundo_nombre'   => $_POST['segundo_nombre'],

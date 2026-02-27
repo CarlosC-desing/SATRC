@@ -3,12 +3,9 @@ require_once '../includes/db/config.php';
 if (session_status() === PHP_SESSION_NONE) session_start();
 if (!isset($_SESSION['usuario'])) exit('Acceso denegado');
 
-// 1. Total general de personas
 $res = $conn->query("SELECT COUNT(*) AS total FROM personas");
 $total_personas = ($res && $row = $res->fetch_assoc()) ? (int)$row['total'] : 0;
 
-// 2. Personas con al menos un acta (Unificando nombres de columnas con AS)
-// 2. Personas con al menos un acta
 $sql_vinculadas = "
     SELECT COUNT(DISTINCT id_persona) AS total FROM (
         -- NACIMIENTO: Usamos a la Madre y al Padre porque 'id_persona' (niño) no existe en esta tabla
@@ -37,10 +34,8 @@ $sql_vinculadas = "
 $res_v = $conn->query($sql_vinculadas);
 $con_acta = ($res_v && $row_v = $res_v->fetch_assoc()) ? (int)$row_v['total'] : 0;
 
-// 3. Personas sin ningún acta
 $sin_acta = $total_personas - $con_acta;
 
-// Mostrar dashboard
 echo "<div class='dashboard'>
         <h3 class='dashboard__title'>Resumen del Sistema</h3>
         <div class='dashboard__contadores'>

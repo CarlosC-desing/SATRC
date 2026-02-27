@@ -3,13 +3,11 @@ require_once '../../includes/db/config.php';
 include ROOT_PATH . 'modules/login/verificar_sesion.php';
 include ROOT_PATH . 'includes/db/conexion.php';
 
-// Captura de variables
 $modo = $_GET['modo'] ?? 'general';
 $desde = $_GET['desde'] ?? date('Y-01-01');
 $hasta = $_GET['hasta'] ?? date('Y-12-31');
 $tipos_sel = $_GET['tipo'] ?? [];
 
-// Validación de seguridad
 $modos_validos = ['general', 'fecha', 'registro', 'nacimiento', 'matrimonio', 'defuncion', 'union'];
 if (!in_array($modo, $modos_validos)) {
     $modo = 'general';
@@ -27,7 +25,6 @@ include ROOT_PATH . 'includes/components/header.php';
     <main class="content-area">
         <div class="container-fluid">
             <?php
-            // Sistema de enrutamiento simple para las tablas
             $reportes = [
                 'general'    => 'reporte_general.php',
                 'fecha'      => 'reporte_fecha.php',
@@ -40,7 +37,7 @@ include ROOT_PATH . 'includes/components/header.php';
 
             $archivo_a_incluir = $reportes[$modo] ?? 'reporte_general.php';
 
-            // Verificamos que el archivo exista antes de incluirlo
+
             if (file_exists(__DIR__ . '/' . $archivo_a_incluir)) {
                 include __DIR__ . '/' . $archivo_a_incluir;
             } else {

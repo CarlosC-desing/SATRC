@@ -1,18 +1,15 @@
 <?php
-// Mover includes al principio para asegurar que la sesión esté disponible antes de usarla
+
 require_once '../../includes/db/config.php';
 
-// Iniciar sesión si no está iniciada (aunque config.php suele hacerlo)
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Generación de Token CSRF si no existe
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
-// Verificación de permisos de Admin
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
     header('Location: ' . BASE_URL . 'public/index.php');
     exit();

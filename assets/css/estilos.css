@@ -13,8 +13,8 @@
   padding: 0 20px;
   position: fixed;
   width: 100%;
-  top: 0; /* Define el punto de anclaje */
-  z-index: 1000; /* Asegura que quede sobre otros elementos */
+  top: 0;
+  z-index: 1000;
 }
 
 .header--izquierda {
@@ -51,9 +51,7 @@
   gap: 5px;
   font-size: 12px;
 }
-
 /*SIDEBAR BUSQUEDA DE BUSCAR.PHP*/
-
 #sidebar {
   width: 240px;
   padding: 20px;

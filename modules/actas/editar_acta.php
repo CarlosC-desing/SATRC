@@ -10,7 +10,6 @@ $row = null;
 $id_persona = isset($_GET['id_persona']) ? (int)$_GET['id_persona'] : 0;
 
 if ($id_persona > 0) {
-    // CONSULTA PREPARADA: Cambiado a minúsculas para compatibilidad (personas/nacimiento)
     $sql = "SELECT p.primer_nombre, p.primer_apellido, p.fecha_nacimiento, n.lugar_nacimiento, n.nombre_padre, n.nombre_madre 
             FROM personas p
             JOIN nacimiento n ON p.id_persona = n.id_persona

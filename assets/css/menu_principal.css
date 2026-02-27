@@ -82,7 +82,6 @@ body {
     "bitacora bitacora";
 }
 
-/* --- Ajustes de alineación tipo Lista --- */
 .menu__item {
   color: #1d47bc;
   text-decoration: none;
@@ -91,8 +90,8 @@ body {
   border-radius: 4px;
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Alineado a la izquierda */
-  padding-left: 15%; /* Empuja el contenido al centro pero mantiene la alineación */
+  justify-content: flex-start;
+  padding-left: 15%;
   gap: 20px;
   transition:
     transform 0.2s,
@@ -117,10 +116,8 @@ body {
   align-items: center;
   gap: 10px;
   font-size: 1.1rem;
-  white-space: nowrap; /* Evita que el texto salte de línea */
+  white-space: nowrap;
 }
-
-/* Áreas del Grid */
 .item-crear {
   grid-area: crear;
 }
@@ -152,7 +149,6 @@ body {
   padding: 0;
 }
 
-/* --- Notificación --- */
 .notificacion-numero {
   background-color: red;
   color: white;
@@ -166,7 +162,6 @@ body {
   flex-shrink: 0;
 }
 
-/* --- Dashboard --- */
 .main__dashboard {
   width: 35%;
 }

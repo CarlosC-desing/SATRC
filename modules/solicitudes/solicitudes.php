@@ -22,7 +22,6 @@ include ROOT_PATH . 'includes/components/sidebar_busqueda_cedula.php';
 
     .select-corto {
         width: 80px;
-        /* Ancho fijo para el tipo de documento */
         flex-shrink: 0;
     }
 
@@ -76,28 +75,19 @@ include ROOT_PATH . 'includes/components/sidebar_busqueda_cedula.php';
 
 <script>
     function seleccionarPersona(cedulaCompleta, id, nombre) {
-        // Al seleccionar, ponemos el valor completo en el input visual
-        // Opcional: Podrías separar la letra y ponerla en el select, pero ponerlo todo en el input es más fácil
         document.getElementById('cedula').value = cedulaCompleta;
         document.getElementById('id_persona_hidden').value = id;
         document.getElementById('resultado_busqueda').innerHTML = '<span style="color:green; font-weight:bold; margin-top:5px; display:block;">✅ ' + nombre + '</span>';
     }
 
-    // Función centralizada de búsqueda
     function buscarPersona() {
         const tipo = document.getElementById('tipo_doc').value;
         const numero = document.getElementById('cedula').value.trim();
 
-        // Limpiar ID si se edita
         document.getElementById('id_persona_hidden').value = '';
 
-        // Solo buscar si hay números escritos
         if (numero.length >= 3) {
-            // Concatenamos aquí: "V" + "-" + "123456"
-            // Si el usuario ya escribió "V-123", limpiamos para no enviar "V-V-123"
-            // Pero asumimos que el usuario solo escribe números en el input
 
-            // Limpieza básica por si el usuario escribe "V-123" dentro del input
             let numeroLimpio = numero.replace(/^[VEPvep]-/, '');
 
             const busquedaCompleta = tipo + '-' + numeroLimpio;
@@ -115,10 +105,7 @@ include ROOT_PATH . 'includes/components/sidebar_busqueda_cedula.php';
         }
     }
 
-    // Escuchar cambios en el input de texto
     document.getElementById('cedula').addEventListener('input', buscarPersona);
-
-    // Escuchar cambios en el select (por si cambia de V a E con el número ya escrito)
     document.getElementById('tipo_doc').addEventListener('change', buscarPersona);
 </script>
 </body>

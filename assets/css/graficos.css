@@ -1,27 +1,19 @@
-/* ==========================================================================
-   ESTILOS EXCLUSIVOS: DASHBOARD Y GRÁFICOS
-   ========================================================================== */
-
-/* 1. LAYOUT FULL WIDTH (Sin Sidebar) */
 .full-layout {
   display: flex;
   width: 100%;
-  margin-top: 12vh; /* Espacio para el header fijo del sistema */
+  margin-top: 12vh;
   min-height: 88vh;
 }
-
 .content-full {
   width: 100%;
   padding: 20px 40px;
   overflow-y: auto;
 }
 
-/* 2. HEADER DEL DASHBOARD */
 .dashboard-section {
-  max-width: 1600px; /* Ancho máximo para monitores grandes */
+  max-width: 1600px;
   margin: 0 auto;
 }
-
 .dashboard-header {
   display: flex;
   justify-content: space-between;
@@ -32,7 +24,6 @@
   padding-bottom: 20px;
   border-bottom: 2px solid #e2e8f0;
 }
-
 .title-main-w {
   color: white;
   font-size: 2rem;
@@ -40,15 +31,12 @@
   text-transform: uppercase;
   font-weight: 800;
 }
-
 .subtitle-w {
   color: #64748b;
   font-size: 1rem;
   margin-top: 5px;
   font-weight: 500;
 }
-
-/* 3. BARRA DE FILTROS */
 .main-filters {
   display: flex;
   gap: 15px;
@@ -58,20 +46,17 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   align-items: flex-end;
 }
-
 .filter-group {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
-
 .filter-group label {
   font-size: 0.8rem;
   font-weight: bold;
   color: #2b388f;
   text-transform: uppercase;
 }
-
 .filter-group input,
 .filter-group select {
   padding: 10px;
@@ -83,7 +68,6 @@
   font-family: inherit;
   min-width: 140px;
 }
-
 .btn-primary {
   padding: 10px 20px;
   background-color: #000080;
@@ -99,19 +83,15 @@
   gap: 8px;
   transition: background 0.3s ease;
 }
-
 .btn-primary:hover {
   background-color: #1a1a9c;
 }
-
-/* 4. TARJETAS KPI (Indicadores) */
 .kpi-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 25px;
   margin-bottom: 30px;
 }
-
 .kpi-card {
   background: white;
   border-radius: 15px;
@@ -122,11 +102,9 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease;
 }
-
 .kpi-card:hover {
   transform: translateY(-5px);
 }
-
 .kpi-icon {
   font-size: 2.5rem;
   background: #f8fafc;
@@ -138,7 +116,6 @@
   border-radius: 50%;
   flex-shrink: 0;
 }
-
 .kpi-info h3 {
   font-size: 2rem;
   color: #1e293b;
@@ -146,14 +123,12 @@
   line-height: 1;
   font-weight: 800;
 }
-
 .kpi-info span {
   font-size: 0.9rem;
   color: #64748b;
   text-transform: uppercase;
   font-weight: bold;
 }
-
 .kpi-blue {
   border-left: 5px solid #3498db;
 }
@@ -166,8 +141,6 @@
 .kpi-purple {
   border-left: 5px solid #9b59b6;
 }
-
-/* 5. CONTENEDORES DE GRÁFICOS */
 .charts-grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -175,7 +148,6 @@
   margin-top: 25px;
   margin-bottom: 25px;
 }
-
 .chart-box {
   background: white;
   border-radius: 15px;
@@ -184,11 +156,9 @@
   position: relative;
   border: 1px solid #f1f5f9;
 }
-
 .full-width {
   grid-column: 1 / -1;
 }
-
 .chart-header {
   display: flex;
   justify-content: space-between;
@@ -197,7 +167,6 @@
   border-bottom: 1px solid #f1f5f9;
   padding-bottom: 15px;
 }
-
 .chart-header h4 {
   margin: 0;
   color: #2b388f;
@@ -205,7 +174,6 @@
   text-transform: uppercase;
   font-weight: bold;
 }
-
 .btn-mini {
   background: #f1f5f9;
   border: 1px solid #e2e8f0;
@@ -217,27 +185,21 @@
   transition: all 0.2s;
   font-weight: bold;
 }
-
 .btn-mini:hover {
   background: #e2e8f0;
   color: #2b388f;
   border-color: #cbd5e1;
 }
-
-/* Canvas Wrappers */
 .chart-canvas-container {
   height: 300px;
   position: relative;
   width: 100%;
 }
-
 .chart-canvas-container-lg {
   height: 400px;
   position: relative;
   width: 100%;
 }
-
-/* 6. RESPONSIVE */
 @media (max-width: 992px) {
   .charts-grid-2 {
     grid-template-columns: 1fr;
@@ -260,21 +222,15 @@
     padding: 20px;
   }
 }
-/* ==========================================================================
-   ESTILOS DE LA TARJETA DE POBLACIÓN (KPI UNIFICADO)
-   ========================================================================== */
-
 .kpi-card-unified {
   background: white;
-  padding: 25px; /* Espaciado interno cómodo */
-  border-radius: 15px; /* Bordes redondeados modernos */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra suave */
-  margin-bottom: 25px; /* Separación con los elementos de abajo */
-  text-align: center; /* Todo el texto centrado */
-  border: 1px solid #f1f5f9; /* Borde sutil para definición */
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 25px;
+  text-align: center;
+  border: 1px solid #f1f5f9;
 }
-
-/* Título pequeño "Población Total" */
 .kpi-header small {
   color: #64748b;
   font-size: 0.9rem;
@@ -282,55 +238,45 @@
   font-weight: 700;
   letter-spacing: 0.5px;
 }
-
-/* El número grande */
 .kpi-header h3 {
-  color: #2b388f; /* Azul institucional */
+  color: #2b388f;
   font-size: 2.5rem;
   margin: 10px 0;
   font-weight: 800;
   line-height: 1;
 }
-
-/* El texto pequeño "Personas" al lado del número */
 .kpi-header h3 small {
   font-size: 1rem;
   color: #94a3b8;
   font-weight: 500;
   text-transform: capitalize;
 }
-
-/* Contenedor de la Barra de Género */
 .gender-bar {
   display: flex;
-  height: 35px; /* Altura de la barra */
+  height: 35px;
   width: 100%;
-  border-radius: 8px; /* Bordes redondeados de la barra */
-  overflow: hidden; /* Para que el contenido no se salga de los bordes redondeados */
+  border-radius: 8px;
+  overflow: hidden;
   margin-top: 20px;
   font-size: 0.85rem;
   font-weight: bold;
-  color: white; /* Texto blanco dentro de la barra */
-  background-color: #f1f5f9; /* Color de fondo por si no hay datos */
+  color: white;
+  background-color: #f1f5f9;
 }
-
-/* Parte Izquierda (Hombres - Azul) */
 .bar-m {
   background-color: #2980b9;
   display: flex;
   align-items: center;
-  padding-left: 15px; /* Espacio para el texto a la izquierda */
-  white-space: nowrap; /* Evita que el texto se rompa */
-  transition: width 1s ease-in-out; /* Animación suave al cargar */
+  padding-left: 15px;
+  white-space: nowrap;
+  transition: width 1s ease-in-out;
 }
-
-/* Parte Derecha (Mujeres - Rosa) */
 .bar-f {
   background-color: #fd79a8;
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Texto alineado a la derecha */
-  padding-right: 15px; /* Espacio para el texto a la derecha */
+  justify-content: flex-end;
+  padding-right: 15px;
   white-space: nowrap;
   transition: width 1s ease-in-out;
 }

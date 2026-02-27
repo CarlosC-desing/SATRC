@@ -25,7 +25,6 @@ if (!is_array($tipos)) $tipos = [$tipos];
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             <?php foreach ($tipos as $tipo): ?>
-                // Modo 'registro' (busca por fecha_registro)
                 cargarTabla('<?= $tipo ?>', 'registro', '<?= $desde ?>', '<?= $hasta ?>', 1);
             <?php endforeach; ?>
         });

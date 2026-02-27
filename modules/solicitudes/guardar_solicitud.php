@@ -1,5 +1,4 @@
 <?php
-// CORRECCIÓN: Rutas ajustadas para subir dos niveles y entrar a las carpetas correctas
 require_once '../../includes/db/config.php';
 include '../../modules/login/verificar_sesion.php';
 include '../../includes/db/conexion.php';
@@ -10,7 +9,6 @@ if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_tok
     exit;
 }
 
-// Recibimos el ID desde el campo oculto que genera el AJAX en solicitudes.php
 $id_persona = $_POST['id_persona'] ?? '';
 $tipo_acta = $_POST['tipo_acta'] ?? '';
 $motivo = $_POST['motivo'] ?? '';
@@ -21,7 +19,6 @@ if ($id_persona && $tipo_acta && $motivo) {
     $stmt->bind_param("iss", $id_persona, $tipo_acta, $motivo);
 
     if ($stmt->execute()) {
-        // Registrar en historial de cambios 📝
         $detalle = "Solicitud registrada para persona ID $id_persona. Tipo: $tipo_acta.";
         registrarLog($conn, $_SESSION['usuario'], "Solicitudes", "Registro de solicitud", $detalle);
 
@@ -31,7 +28,6 @@ if ($id_persona && $tipo_acta && $motivo) {
         echo "❌ Error al guardar: " . $conn->error;
     }
 } else {
-    // Nota: El enlace vuelve a solicitudes.php que es tu archivo de registro
     echo "<p>❌ Error: No se seleccionó una persona válida o faltan campos. <a href='solicitudes.php'>Volver</a></p>";
 }
 

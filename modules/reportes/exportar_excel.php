@@ -1,33 +1,27 @@
 <?php
-// 1. RUTAS CORREGIDAS
 require_once '../../includes/db/config.php';
 include ROOT_PATH . 'modules/login/verificar_sesion.php';
 include ROOT_PATH . 'includes/db/conexion.php';
 
-// 2. RECIBIR PARÁMETROS (IGUAL QUE EN EL REPORTE)
 $tipo   = $_GET['tipo'] ?? '';
 $origen = $_GET['origen'] ?? 'general';
 $desde  = $_GET['desde'] ?? '';
 $hasta  = $_GET['hasta'] ?? '';
 
-// Ajuste de horas para filtro de registro
 if ($origen == 'registro') {
     $desde = $desde ? $desde . ' 00:00:00' : '';
     $hasta = $hasta ? $hasta . ' 23:59:59' : '';
 }
 
-// 3. ENCABEZADOS PARA FORZAR DESCARGA EN EXCEL
 header("Content-Type: application/vnd.ms-excel; charset=utf-8");
 header("Content-Disposition: attachment; filename=reporte_{$tipo}_" . date('Y-m-d') . ".xls");
 header("Pragma: no-cache");
 header("Expires: 0");
 
-// BOM para que Excel lea bien las tildes y ñ
 echo "\xEF\xBB\xBF";
 
 echo "<table border='1'>";
 
-// 4. LÓGICA SQL ADAPTADA A TU NUEVA ESTRUCTURA
 $sql = "";
 
 switch ($tipo) {
@@ -149,13 +143,11 @@ switch ($tipo) {
         exit;
 }
 
-// 5. EJECUTAR Y MOSTRAR DATOS
 $result = $conn->query($sql);
 if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
         foreach ($row as $valor) {
-            // Decodificamos caracteres especiales por si acaso
             echo "<td>" . htmlspecialchars($valor) . "</td>";
         }
         echo "</tr>";

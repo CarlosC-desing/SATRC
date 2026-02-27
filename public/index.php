@@ -47,7 +47,6 @@ require_once ROOT_PATH . 'includes/db/conexion.php';
                 <?php if (isset($_GET['error'])): ?>
                     <p style="color:red; font-weight:bold;">
                         <?php
-                        // Manejo de errores básicos vía URL si vienen de validar_login.php
                         echo htmlspecialchars($_GET['error']);
                         ?>
                     </p>

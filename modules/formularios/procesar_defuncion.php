@@ -14,9 +14,6 @@ header('Content-Type: application/json');
 
 mysqli_report(MYSQLI_REPORT_OFF);
 
-/**
- * Obtiene ID y Nombre completo para llenar campos de texto e IDs relacionales
- */
 function obtenerDatosPersona($conn, $cedula)
 {
     if (empty($cedula)) return null;
@@ -36,7 +33,7 @@ try {
 
     $conn->begin_transaction();
 
-    // 1. Validación y Obtención de datos de las personas involucradas
+
     $p_fallecido = obtenerDatosPersona($conn, $_POST['cedula_persona']);
     $p_autoridad = obtenerDatosPersona($conn, $_POST['cedula_autoridad']);
     $p_testigo1  = obtenerDatosPersona($conn, $_POST['cedula_t1']);
@@ -46,7 +43,6 @@ try {
         throw new Exception("CODE_CEDULA_NOT_FOUND");
     }
 
-    // 2. Generación de número de acta correlativo
     $anio_actual = date('Y');
     $query_ultimo = "SELECT numero_acta FROM defuncion WHERE numero_acta LIKE 'D%-$anio_actual' ORDER BY id DESC LIMIT 1";
     $res_ultimo = $conn->query($query_ultimo);
@@ -58,7 +54,7 @@ try {
     }
     $num_acta = "D" . str_pad($nuevo_num, 7, "0", STR_PAD_LEFT) . "-" . $anio_actual;
 
-    // 3. Inserción en las 19 columnas identificadas en tu BD
+
     $sql = "INSERT INTO defuncion (
                 id_persona, fecha_defuncion, hora_defuncion, lugar_defuncion, causa_defuncion, 
                 id_autoridad, numero_acta, nombre_medico, nombre_declarante, 
@@ -105,10 +101,8 @@ try {
 } catch (Exception $e) {
     if (isset($conn)) $conn->rollback();
 
-    // Log para el programador
     error_log("Error Defunción: " . $e->getMessage());
 
-    // Mensaje para el usuario
     $mensaje_final = (strpos($e->getMessage(), "CODE_CEDULA") !== false) ? $msj_error_ced : $msj_error_gen;
 
     if (ob_get_length()) ob_clean();

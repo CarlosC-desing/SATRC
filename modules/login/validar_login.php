@@ -36,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($row = $result->fetch_assoc()) {
         if (password_verify($contraseña, $row['contraseña'])) {
-            // ÉXITO: Limpiar intentos fallidos y configurar sesión
             $stmt_reset = $conn->prepare("DELETE FROM login_attempts WHERE email = ?");
             $stmt_reset->bind_param("s", $email);
             $stmt_reset->execute();

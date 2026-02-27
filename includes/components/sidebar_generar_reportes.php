@@ -21,7 +21,6 @@
             <input type="hidden" name="modo" value="<?= htmlspecialchars($modo) ?>">
 
             <?php
-            // Mostramos el rango de fechas si estamos en los modos de tabla o en la página de gráficos
             $es_grafico = (basename($_SERVER['PHP_SELF']) == 'visualizar_graficos.php');
             if ($modo === 'fecha' || $modo === 'registro' || $es_grafico):
             ?>
